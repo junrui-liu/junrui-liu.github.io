@@ -2,7 +2,7 @@
 layout: post
 title:  "Learning Contract Invariants Using Reinforcement Learning"
 categories: research
-authors: "<strong>Junrui Liu</strong>, Yanju Chen, Bryan Tan, Isil Dillig, Yu Feng"
+authors: "<strong>Junrui Liu</strong>⁺, Yanju Chen⁺, Bryan Tan, Isil Dillig, Yu Feng"
 venue: "To appear at ASE 2022"
 pdf: /pdfs/cider.pdf
 ---

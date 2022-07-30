@@ -26,7 +26,7 @@
         
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
           <tr style="padding:0px">
-            <td style="padding:2.5%;width:50%;vertical-align:middle">
+            <td style="padding:2%;width:50%;vertical-align:middle">
               <h1>
                 Junrui Liu | 刘均锐
               </h1>
@@ -39,7 +39,8 @@
                 I received my undergraduate degree from Vassar College, and my M.S. from Yale University.
               </p>
               <p style="text-align:center">
-                <a target="_blank" href="https://mailhide.io/en/e/qzWe0mau">Email</a> &nbsp;/&nbsp;
+                <a target="_blank" href="https://mailhide.io/en/e/qzWe0mau">Email</a>
+                &nbsp;/&nbsp;
                 <a href="https://github.com/junrui-liu">GitHub</a>
                 &nbsp;/&nbsp;
                 <!-- <a href="https://scholar.google.com/citations?user=GCYG4GoAAAAJ">Google Scholar</a> &nbsp;/&nbsp; -->
@@ -48,7 +49,7 @@
                 <a href="https://junrui-liu.github.io"> CV </a> -->
               </p>
             </td>
-            <td style="padding:2.5%;width:20%;max-width:30%">
+            <td style="padding:4%;width:20%;max-width:30%">
               <img style="width:100%;max-width:100%" alt="profile photo" src="images/profile0.png">
             </td>
             
@@ -57,8 +58,13 @@
 
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
           <tr>
-            <td style="padding:2.5%;width:100%;vertical-align:middle">
+            <td style="padding:2%;padding-top:0%;padding-bottom:0%;width:100%;vertical-align:middle">
               <h2>Research</h2>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:2%;padding-top:0%;padding-bottom:0%;width:100%;vertical-align:middle">
+              <p>(⁺ means equal contribution)</p>
             </td>
           </tr>
         </table>
@@ -68,7 +74,7 @@
           {% for cat in post.categories %}
           {% if cat == 'research' %}
           <tr>
-            <td style="padding:2.5%;width:75%;vertical-align:middle">
+            <td style="padding:2%;padding-top:0%;padding-bottom:0%;width:75%;vertical-align:middle">
               <h3>
               {% if post.pdf %}
               <a href="{{post.pdf}}">{{post.title}}</a>
@@ -107,12 +113,12 @@
           {% endfor %}
         </table>
 
-        <!-- <br> -->
+        <br>
 
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
           <tr>
-            <td style="padding:2.5%;width:100%;vertical-align:middle">
-              <h2>Past TA</h2>
+            <td style="padding:2%;padding-bottom:0%;width:100%;vertical-align:middle">
+              <h2>TA</h2>
               <!-- <p>
                 I'm interested in ...
               </p> -->
@@ -124,12 +130,26 @@
           <li>CS162: Programming Languages (<a href="https://github.com/fredfeng/CS162">Winter 2022</a>)</li>
         </ul>
         <br>
+
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          <tr>
+            <td style="padding:2%;padding-bottom:0%;width:100%;vertical-align:middle">
+              <h2>Stuff</h2>
+              <!-- <p>
+                I'm interested in ...
+              </p> -->
+            </td>
+          </tr>
+        </table>
+        <ul>
+          <li>Solver-aided chorale composition (<a href="/pdfs/choco.pdf">poster</a>)</li>
+        </ul>
         <br>
         <br>
 
         <!-- <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
           <tr>
-            <td style="padding:2.5%;width:100%;vertical-align:middle">
+            <td style="padding:2%;width:100%;vertical-align:middle">
               <h2>Intel Projects</h2>
               <p>Besides my work on the RealSense depth sensors and the publications above, a sampling of my publicly disclosed work
               </p>
@@ -142,10 +162,10 @@
           {% for cat in post.categories %}
           {% if cat == 'Intel' %}
           <tr>
-            <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px">
+            <td style="padding:2%;width:25%;vertical-align:middle;min-width:120px">
               <img src="/tn{{post.image}}" alt="project image" style="width:auto; height:auto; max-width:100%;" />
             </td>
-            <td style="padding:2.5%;width:75%;vertical-align:middle">
+            <td style="padding:2%;width:75%;vertical-align:middle">
               <h3>{{post.title}}</h3>
               <br>
               <em>{{post.categories}} {{post.course}}</em>
@@ -196,7 +216,7 @@
         <br>
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
           <tr>
-            <td style="padding:2.5%;width:100%;vertical-align:middle">
+            <td style="padding:2%;width:100%;vertical-align:middle">
               <h2>Other Projects</h2>
               <p> These include coursework, side projects and unpublished research work. 
               </p>
@@ -209,10 +229,10 @@
           {% for cat in post.categories %}
           {% if cat != 'research' and cat != 'Intel' %}
           <tr>
-            <td style="padding:2.5%;width:25%;vertical-align:middle;min-width:120px">
+            <td style="padding:2%;width:25%;vertical-align:middle;min-width:120px">
               <img src="/tn{{post.image}}" alt="project image" style="width:auto; height:auto; max-width:100%;" />
             </td>
-            <td style="padding:2.5%;width:75%;vertical-align:middle">
+            <td style="padding:2%;width:75%;vertical-align:middle">
               <h3>{{post.title}}</h3>
               <br>
               <em>{{post.categories}} {{post.course}}</em>
