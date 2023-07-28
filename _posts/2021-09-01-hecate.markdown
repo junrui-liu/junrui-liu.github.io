@@ -4,5 +4,5 @@ title:  "Tree Traversal Synthesis Using Domain-Specific Symbolic Compilation"
 categories: research
 authors: "Yanju Chen, <strong>Junrui Liu</strong>, Yu Feng, Rastislav Bodik"
 venue: "ASPLOS 2022"
-pdf: https://dl.acm.org/doi/10.1145/3503222.3507751
+arxiv: https://dl.acm.org/doi/10.1145/3503222.3507751
 ---
