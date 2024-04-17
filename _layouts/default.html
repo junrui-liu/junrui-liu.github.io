@@ -11,7 +11,8 @@
 
   <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet"
+    type="text/css">
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
   <link rel="shortcut icon" href="images/favicon.ico">
 
@@ -20,20 +21,24 @@
 
 
 <body>
-  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+  <table
+    style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
     <tr style="padding:0px">
       <td style="padding:0px">
-        
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+
+        <table
+          style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
           <tr style="padding:0px">
             <td style="padding:2%;width:50%;vertical-align:middle">
               <h1>
                 Junrui Liu
               </h1>
-              <p>I am a second-year PhD student studying computer science at <a href="https://www.ucsb.edu/">UC Santa Barbara</a>, advised by Professor <a href="https://fredfeng.github.io/">Yu Feng</a>. I am interested in program verification and synthesis. 
+              <p>I am a third-year PhD student studying computer science at <a href="https://www.ucsb.edu/">UC Santa
+                  Barbara</a>, advised by Professor <a href="https://fredfeng.github.io/">Yu Feng</a>. I am interested
+                in program verification and synthesis.
               </p>
               <p>
-                
+
               </p>
               <p>
                 I received my undergraduate degree from Vassar College, and my M.S. from Yale University.
@@ -52,11 +57,12 @@
             <td style="padding:4%;width:20%;max-width:30%">
               <img style="width:100%;max-width:100%" alt="profile photo" src="images/profile0.png">
             </td>
-            
+
           </tr>
         </table>
 
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+        <table
+          style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
           <tr>
             <td style="padding:2%;padding-top:0%;padding-bottom:0%;width:100%;vertical-align:middle">
               <h2>Research</h2>
@@ -68,7 +74,8 @@
             </td>
           </tr>
         </table>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+        <table
+          style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
 
           {% for post in site.posts %}
           {% for cat in post.categories %}
@@ -76,12 +83,12 @@
           <tr>
             <td style="padding:2%;padding-top:0%;padding-bottom:0%;width:75%;vertical-align:middle">
               <h3>
-              {% if post.pdf %}
-              <a href="{{post.pdf}}">{{post.title}}</a>
-              {% else %}
-              <a href="{{site.url}}/#">{{post.title}}</a>
-              {% endif %}
-            </h3>
+                {% if post.pdf %}
+                <a href="{{post.pdf}}">{{post.title}}</a>
+                {% else %}
+                <a href="{{site.url}}/#">{{post.title}}</a>
+                {% endif %}
+              </h3>
               <br>
               {{post.authors}}
 
@@ -117,10 +124,11 @@
 
         <br>
 
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+        <table
+          style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
           <tr>
             <td style="padding:2%;padding-bottom:0%;width:100%;vertical-align:middle">
-              <h2>TA</h2>
+              <h2>Teaching</h2>
               <!-- <p>
                 I'm interested in ...
               </p> -->
@@ -128,12 +136,30 @@
           </tr>
         </table>
         <ul>
-          <li>CS160: Translation of Computer Programs (<a href="https://github.com/fredfeng/CS160/tree/fall-2021">Fall'21</a>, <a href="https://github.com/fredfeng/CS160/">Spring'23</a>)</li>
-          <li>CS162: Programming Languages (<a href="https://github.com/fredfeng/CS162/tree/winter-2022">Winter'22</a>, <a href="https://github.com/fredfeng/CS162/tree/winter-2022">Winter'23</a>)</li>
+          <li><a href="https://engineering.ucsb.edu/news/class-2023-selects-teaching-assistants-year">College of
+              Engineering Outstanding
+              Teaching Assistant in Computer Science</a>
+          </li>
+          <li>Co-instructor: <a href="https://github.com/fredfeng/CS292C/">CS292C - Computer-Aided Reasoning for
+              Software</a> (Spring'24)
+          </li>
+          <li>Teaching assistant: <a href="https://github.com/fredfeng/CS162/tree/winter-2022">CS162 - Programming
+              Languages</a>
+            (Winter'24,
+            Winter'22, Winter'23)
+          </li>
+          <li>Teaching assistant: <a href="https://github.com/fredfeng/CS160">CS160 - Translation of Computer
+              Programs</a> (Spring'23,
+            Fall'21)
+          </li>
+          <li>Teaching assistant: <a href="https://github.com/fredfeng/CS190-blockchain">CS190J - Blockchain
+              Technologies and Security</a> (Spring'24)
+          </li>
         </ul>
         <br>
 
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+        <table style="
+              width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
           <tr>
             <td style="padding:2%;padding-bottom:0%;width:100%;vertical-align:middle">
               <h2>Stuff</h2>
@@ -144,7 +170,6 @@
           </tr>
         </table>
         <ul>
-          <li>Outstanding Teaching Assistant in Computer Science (<a href="https://engineering.ucsb.edu/news/class-2023-selects-teaching-assistants-year">link</a>)</li>
           <li>Solver-Aided Chorale Composition (<a href="/pdfs/choco.pdf">poster</a>)</li>
         </ul>
         <br>
@@ -282,14 +307,15 @@
           {% endfor %}
         </table> -->
 
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+        <table
+          style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
           <tr>
             <td style="padding:0px">
               <br>
               <p style="text-align:center;font-size:small;">
-                Design and source code from 
+                Design and source code from
                 <a style="font-size:small;" href="https://github.com/leonidk/new_website">[1]</a>
-                and 
+                and
                 <a style="font-size:small;" href="https://jonbarron.info/">[2]</a>
               </p>
             </td>
@@ -301,4 +327,3 @@
 </body>
 
 </html>
-
