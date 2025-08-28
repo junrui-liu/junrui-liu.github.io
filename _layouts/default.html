@@ -27,6 +27,13 @@
     <tr style="padding:0px">
       <td style="padding:0px">
 
+        {% if page.layout == 'page' %}
+        <!-- Post content -->
+        <div style="padding:2%;width:100%;vertical-align:middle">
+          {{ content }}
+        </div>
+        {% else %}
+        <!-- Homepage content -->
         <table
           style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
           <tr style="padding:0px">
@@ -34,9 +41,21 @@
               <h1>
                 Junrui Liu
               </h1>
+              <p style="text-align:center">
+
+                <a target="_blank" href="https://mailhide.io/en/e/qzWe0mau">Email</a>
+                &nbsp;/&nbsp;
+                <a href="https://scholar.google.com/citations?user=DWWFQkkAAAAJ">Google Scholar</a>
+                &nbsp;/&nbsp;
+                <a href="https://github.com/junrui-liu">GitHub</a>
+                &nbsp;/&nbsp;
+                <a href="https://bsky.app/profile/junrui-liu.bsky.social">Bluesky</a>
+                <!-- &nbsp;/&nbsp;
+                <a href="https://junrui-liu.github.io"> CV </a> -->
+
+              </p>
               <p>I am a 5th-year Computer Science PhD student at <a href="https://www.ucsb.edu/">UC Santa
-                  Barbara</a>, advised by <a href="https://fredfeng.github.io/">Yu Feng</a>. I am interested
-                in all things related to programming languages, especially in verification and synthesis.
+                  Barbara</a>, advised by <a href="https://fredfeng.github.io/">Yu Feng</a>.
               </p>
               <p>
 
@@ -44,19 +63,7 @@
               <p>
                 I received my undergraduate degree from Vassar College, and my M.S. from Yale University.
               </p>
-              <p style="text-align:center">
-                <a target="_blank" href="https://mailhide.io/en/e/qzWe0mau">Email</a>
-                &nbsp;/&nbsp;
-                <a href="https://github.com/junrui-liu">GitHub</a>
-                &nbsp;/&nbsp;
-                <!-- <a href="https://scholar.google.com/citations?user=GCYG4GoAAAAJ">Google Scholar</a> &nbsp;/&nbsp; -->
-                <a href="https://www.linkedin.com/in/junrui-liu/"> LinkedIn </a>
-                &nbsp;/&nbsp;
-                <a href="https://bsky.app/profile/junrui-liu.bsky.social"> Bluesky </a>
 
-                <!-- &nbsp;/&nbsp;
-                <a href="https://junrui-liu.github.io"> CV </a> -->
-              </p>
             </td>
             <td style="padding:4%;width:20%;max-width:30%">
               <img style="width:100%;max-width:100%" alt="profile photo" src="images/profile0.png">
@@ -65,21 +72,57 @@
           </tr>
         </table>
 
-        <table
-          style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+
+        <hr>
+        <p style="text-align:center">
+          <a href="#research">Research</a>
+          &nbsp;§&nbsp;
+          <a href="#teaching">Teaching</a>
+          &nbsp;§&nbsp;
+          <a href="#personal">Personal</a>
+          <!-- &nbsp;/&nbsp;
+                <a href="https://junrui-liu.github.io"> CV </a> -->
+        </p>
+        <hr>
+
+
+        <p>
+        <h2 id="research">Research</h2>
+        </p>
+
+        <p>I'm interested in helping programmers build <em><b>provably correct, efficient</b></em> software, using
+          techniques from <a href="https://en.wikipedia.org/wiki/Programming_language_theory">programming
+            languages</a> and <a href="https://en.wikipedia.org/wiki/Formal_methods">formal methods</a>. To achieve
+          this, I work on:
+        <ul>
+          <li>developing <em>program synthesizers</em> to
+            generate correct-by-construction software automatically</li>
+          <li><em>formally verifying</em> that existing software
+            conforms to logical speficiation</li>
+          <li>designing <em>domain-specific languages</em> to make it easier to build reliable software for
+            emerging domains.
+          </li>
+        </ul>
+        <!-- Here is my <a href="">research statement</a> (coming soon). </p> -->
+
+        <p>
+        <h3>Peer-Reviewed Publications</h3>
+        </p>
+        <p>("+" means equal contribution)</p>
+        <table style="
+                width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+
           <tr>
-            <td style="padding:2%;padding-top:0%;padding-bottom:0%;width:100%;vertical-align:middle">
-              <h2>Publications & Manuscripts</h2>
-              <p>("+" means equal contribution)</p>
+            <td style="padding:2%;padding-top:0%;padding-bottom:0%;width:75%;vertical-align:middle">
+
             </td>
-        </table>
-        <table
-          style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+          </tr>
 
           {% for post in site.posts %}
           {% for cat in post.categories %}
-          {% if cat == 'research' %}
+          {% if cat == 'paper' %}
           <tr>
+
             <td style="padding:2%;padding-top:0%;padding-bottom:0%;width:75%;vertical-align:middle">
               <h3>
                 {% if post.doi %}
@@ -90,31 +133,10 @@
               </h3>
               <br>
               {{post.authors}}
-
               <br>
-              <!-- <hr style="height:0px; visibility:hidden;" /> -->
               <em>{{post.venue}}</em>
-              <!-- , {{ post.date | date: "%Y" }} -->
               <br>
-              <!-- 
-              {% if post.arxiv %}
-              <a href="{{post.arxiv}}">arxiv</a> /
-              {% endif %}
-              {% if post.video %}
-              <a href="{{post.video}}">video</a> /
-              {% endif %}
-              {% if post.code %}
-              <a href="{{post.code}}">code</a> /
-              {% endif %}
-              {% if post.poster %}
-              <a href="{{post.poster}}">poster</a> /
-              {% endif %}
-              {% if post.slides %}
-              <a href="{{post.slides}}">slides</a> /
-              {% endif %}
-            -->
               <p></p>
-              <!-- {{ post.excerpt }} -->
             </td>
           </tr>
           {% endif %}
@@ -122,252 +144,312 @@
           {% endfor %}
         </table>
 
-        <br>
 
+        <p>
+        <h3>Conference Presentation</h3>
+        </p>
         <table
           style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+
+          <!-- <tr>
+            <td style="padding:2%;padding-top:0%;padding-bottom:0%;width:75%;vertical-align:middle">
+            </td>
+          </tr> -->
+
+          {% for post in site.posts %}
+          {% for cat in post.categories %}
+          {% if cat == 'talk' %}
           <tr>
-            <td style="padding:2%;padding-bottom:0%;width:100%;vertical-align:middle">
-              <h2>Teaching</h2>
-              <!-- <p>
-                I'm interested in ...
-              </p> -->
 
-              <p>
-
-
-
-
-              <h3>Instructor 🧑‍🏫</h3>
-
-              <div class="grid grid-pad">
-                <div class="col-2-12">
-                  <div class="content">
-                    2025 Fall
-                  </div>
-                </div>
-                <div class="col-10-12">
-                  <div class="content">
-                    <a href="https://cs.ucsb.edu/building-better-tas#cs-501">CS 501 - Techniques of Computer Science
-                      Teaching</a>
-                  </div>
-                </div>
-                <div class="col-2-12">
-                  <div class="content">
-                    2025 Summer
-                  </div>
-                </div>
-                <div class="col-10-12">
-                  <div class="content">
-                    <a href="https://junrui-liu.github.io/cs162/">CS 162 - Programming Languages</a>
-                  </div>
-                </div>
-                <div class="col-2-12">
-                  <div class="content">
-                    2024 Spring
-                  </div>
-                </div>
-                <div class="col-10-12">
-                  <div class="content">
-                    <a href="https://github.com/fredfeng/CS292C/tree/spring-2024">CS 292C - Computer-Aided Reasoning for
-                      Software</a> (co-taught with Yu Feng)
-                  </div>
-                </div>
-              </div>
-
-
+            <td style="padding:2%;padding-top:0%;padding-bottom:0%;width:75%;vertical-align:middle">
+              <h3>
+                {% if post.doi %}
+                <a href="{{post.doi}}">{{post.title}}</a>
+                {% else %}
+                <a href="{{site.url}}/#">{{post.title}}</a>
+                {% endif %}
+              </h3>
               <br>
-
-              <h3>Teaching Assistant 🧑‍💻</h3>
-
-              <div class="grid grid-pad">
-                <div class="col-2-12">
-                  <div class="content">
-                    2025-2026
-                  </div>
-                </div>
-                <div class="col-10-12">
-                  <div class="content">
-                    Lead TA for UCSB Computer Science Department
-                  </div>
-                </div>
-                <div class="col-2-12">
-                  <div class="content">
-                    2025 Spring
-                  </div>
-                </div>
-                <div class="col-10-12">
-                  <div class="content">
-                    <a href="https://ucsb.instructure.com/courses/26675">CS 160 - Compilers</a>
-                  </div>
-                </div>
-                <div class="col-2-12">
-                  <div class="content">
-                    2025 Winter
-                  </div>
-                </div>
-                <div class="col-10-12">
-                  <div class="content">
-                    <a href="https://github.com/fredfeng/CS162">CS 162 - Programming Languages</a>
-                  </div>
-                </div>
-                <div class="col-2-12">
-                  <div class="content">
-                    2024 Spring
-                  </div>
-                </div>
-                <div class="col-10-12">
-                  <div class="content">
-                    <a href="https://github.com/fredfeng/CS190-blockchain">CS 190J - Blockchain
-                      Technologies and Security</a>
-                  </div>
-                </div>
-                <div class="col-2-12">
-                  <div class="content">
-                    2024 Winter
-                  </div>
-                </div>
-                <div class="col-10-12">
-                  <div class="content">
-                    <a href="https://github.com/fredfeng/CS162/tree/winter-2024">CS 162 - Programming Languages</a>
-                  </div>
-                </div>
-                <div class="col-2-12">
-                  <div class="content">
-                    2023 Spring
-                  </div>
-                </div>
-                <div class="col-10-12">
-                  <div class="content">
-                    <a href="https://github.com/fredfeng/CS160">CS 160 - Compilers </a>
-                  </div>
-                </div>
-                <div class="col-2-12">
-                  <div class="content">
-                    2023 Winter
-                  </div>
-                </div>
-                <div class="col-10-12">
-                  <div class="content">
-                    <a href="https://github.com/fredfeng/CS162/tree/winter-2023">CS 162 - Programming Languages</a>
-                  </div>
-                </div>
-                <div class="col-2-12">
-                  <div class="content">
-                    2022 Winter
-                  </div>
-                </div>
-                <div class="col-10-12">
-                  <div class="content">
-                    <a href="https://github.com/fredfeng/CS162/tree/winter-2022">CS 162 - Programming Languages</a>
-                  </div>
-                </div>
-
-                <div class="col-2-12">
-                  <div class="content">
-                    2021 Fall
-                  </div>
-                </div>
-                <div class="col-10-12">
-                  <div class="content">
-                    <a href="https://github.com/fredfeng/CS160/tree/fall-2021">CS 160 - Compilers</a>
-                  </div>
-                </div>
-
-                <div class="col-2-12">
-                  <div class="content">
-                    2018 Spring
-                  </div>
-                </div>
-                <div class="col-10-12">
-                  <div class="content">
-                    <a href="https://catalogue.vassar.edu/preview_course.php?catoid=13&coid=105247">PHIL 125 - Logic</a>
-                    (Vassar)
-                  </div>
-                </div>
-
-              </div>
-
-
+              {{post.authors}}
               <br>
-
-              <h3>Awards 🏆</h3>
-              <ul>
-                <li><b>Teaching Assistant of the Year</b>, UCSB Department of Computer Science, 2025</li>
-                <li><b>Outstanding Teaching Assistant</b>, UCSB College of Engineering, 2024 <a
-                    href="https://engineering.ucsb.edu/news/class-2024-selects-teaching-assistants-year">[press]</a>
-                </li>
-                <li><b>Outstanding Teaching Assistant</b>, UCSB College of Engineering, 2023 <a
-                    href="https://engineering.ucsb.edu/news/class-2023-selects-teaching-assistants-year">[press]</a>
-                </li>
-              </ul>
-
-
-              <h3>Certificates and Training ✅</h3>
-              <ul>
-                <li><a href="https://otl.ucsb.edu/graduate-students/ta-certificate-programs/ccut">Certificate in College
-                    and University Teaching, UCSB</a></li>
-                <li><a href="https://otl.ucsb.edu/graduate-students/ta-certificate-programs/lead-ta-institute">Lead TA
-                    Institute, UCSB</a></li>
-                <li><a href="https://otl.ucsb.edu/graduate-students/ta-certificate-programs/stia">Summer
-                    Teaching Institute for Associates, UCSB</a></li>
-              </ul>
-
-
-              </p>
+              <em>{{post.venue}}</em>
+              <br>
+              <p></p>
             </td>
           </tr>
+          {% endif %}
+          {% endfor %}
+          {% endfor %}
         </table>
-        <br>
 
-        <table style="
-              width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+        <p>
+        <h3>Manuscripts</h3>
+        </p>
+        <table
+          style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+
+          <!-- <tr>
+            <td style="padding:2%;padding-top:0%;padding-bottom:0%;width:75%;vertical-align:middle">
+              
+            </td>
+          </tr> -->
+
+          {% for post in site.posts %}
+          {% for cat in post.categories %}
+          {% if cat == 'manuscript' %}
           <tr>
-            <td style="padding:2%;padding-bottom:0%;width:100%;vertical-align:middle">
-              <h2>Talks & Tutorials</h2>
-              <!-- <p>
-                I'm interested in ...
-              </p> -->
-              <ul>
-                <li>Polymorphism, Curry-Howard, and Program Verification (guest lecture for CS162 @ UCSB)</li>
-                <li>Formal Verification for Zero-Knowledge Proofs (Applied ZK Workshop @ SBC'22)</li>
-                <li>Introduction to Interactive Theorem Proving in Coq (0xPARC Summer Residency 2022)</li>
-                <li>Refinement Types and Program Verification (guest lecture for CS162 @ UCSB)
-                </li>
-              </ul>
+
+            <td style="padding:2%;padding-top:0%;padding-bottom:0%;width:75%;vertical-align:middle">
+              <h3>
+                {% if post.doi %}
+                <a href="{{post.doi}}">{{post.title}}</a>
+                {% else %}
+                <a href="{{site.url}}/#">{{post.title}}</a>
+                {% endif %}
+              </h3>
+              <br>
+              {{post.authors}}
+              <br>
+              <em>{{post.venue}}</em>
+              <br>
+              <p></p>
             </td>
           </tr>
+          {% endif %}
+          {% endfor %}
+          {% endfor %}
         </table>
 
 
         <br>
+        <br>
+
+        <h2 id="teaching">Teaching</h2>
+        <p style="text-align:center">
+          <a href="/eval">Student Evaluations ❤️</a>
+          &nbsp;/&nbsp;
+          <a href="https://docs.google.com/document/d/164pGf9iYhpPtrfrIxvOjCZoSrbKWpKhiyCJWE9Z0t-c/edit?usp=sharing">Sample
+            Lesson Plan 📋</a>
+          &nbsp;/&nbsp;
+          Teaching Philosophy 💭 (coming soon)
+        </p>
+
+        <!-- <p><em>Note: You can click on the titles of most courses below to access the course materials. -->
+        <!-- </em> -->
+        <!-- </p> -->
+
+        <h3>Instructor 🧑‍🏫</h3>
+        <div class="grid grid-pad">
+          <div class="col-2-12">
+            <div class="content">
+              2025 Fall
+            </div>
+          </div>
+          <div class="col-10-12">
+            <div class="content">
+              <a href="https://cs.ucsb.edu/building-better-tas#cs-501">CS 501 - Techniques of Computer Science
+                Teaching</a>
+            </div>
+          </div>
+          <div class="col-2-12">
+            <div class="content">
+              2025 Summer
+            </div>
+          </div>
+          <div class="col-10-12">
+            <div class="content">
+              <a href="https://junrui-liu.github.io/cs162/">CS 162 - Programming Languages</a>
+            </div>
+          </div>
+          <div class="col-2-12">
+            <div class="content">
+              2024 Spring
+            </div>
+          </div>
+          <div class="col-10-12">
+            <div class="content">
+              <a href="https://github.com/fredfeng/CS292C/tree/spring-2024">CS 292C - Computer-Aided Reasoning for
+                Software</a> (co-taught with Yu Feng)
+            </div>
+          </div>
+        </div>
+
+        <br>
 
 
-        <table style="
-              width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-          <tr>
-            <td style="padding:2%;padding-bottom:0%;width:100%;vertical-align:middle">
-              <h2>Personal</h2>
-              <!-- <p>
+        <h3>Teaching Assistant 🧑‍💻</h3>
+
+        <div class="grid grid-pad">
+          <div class="col-2-12">
+            <div class="content">
+              2025-2026
+            </div>
+          </div>
+          <div class="col-10-12">
+            <div class="content">
+              Lead TA for UCSB Computer Science Department
+            </div>
+          </div>
+          <div class="col-2-12">
+            <div class="content">
+              2025 Spring
+            </div>
+          </div>
+          <div class="col-10-12">
+            <div class="content">
+              <a href="https://ucsb.instructure.com/courses/26675">CS 160 - Compilers</a>
+            </div>
+          </div>
+          <div class="col-2-12">
+            <div class="content">
+              2025 Winter
+            </div>
+          </div>
+          <div class="col-10-12">
+            <div class="content">
+              <a href="https://github.com/fredfeng/CS162">CS 162 - Programming Languages</a>
+            </div>
+          </div>
+          <div class="col-2-12">
+            <div class="content">
+              2024 Spring
+            </div>
+          </div>
+          <div class="col-10-12">
+            <div class="content">
+              <a href="https://github.com/fredfeng/CS190-blockchain">CS 190J - Blockchain
+                Technologies and Security</a>
+            </div>
+          </div>
+          <div class="col-2-12">
+            <div class="content">
+              2024 Winter
+            </div>
+          </div>
+          <div class="col-10-12">
+            <div class="content">
+              <a href="https://github.com/fredfeng/CS162/tree/winter-2024">CS 162 - Programming Languages</a>
+            </div>
+          </div>
+          <div class="col-2-12">
+            <div class="content">
+              2023 Spring
+            </div>
+          </div>
+          <div class="col-10-12">
+            <div class="content">
+              <a href="https://github.com/fredfeng/CS160">CS 160 - Compilers </a>
+            </div>
+          </div>
+          <div class="col-2-12">
+            <div class="content">
+              2023 Winter
+            </div>
+          </div>
+          <div class="col-10-12">
+            <div class="content">
+              <a href="https://github.com/fredfeng/CS162/tree/winter-2023">CS 162 - Programming Languages</a>
+            </div>
+          </div>
+          <div class="col-2-12">
+            <div class="content">
+              2022 Winter
+            </div>
+          </div>
+          <div class="col-10-12">
+            <div class="content">
+              <a href="https://github.com/fredfeng/CS162/tree/winter-2022">CS 162 - Programming Languages</a>
+            </div>
+          </div>
+
+          <div class="col-2-12">
+            <div class="content">
+              2021 Fall
+            </div>
+          </div>
+          <div class="col-10-12">
+            <div class="content">
+              <a href="https://github.com/fredfeng/CS160/tree/fall-2021">CS 160 - Compilers</a>
+            </div>
+          </div>
+
+          <div class="col-2-12">
+            <div class="content">
+              2018 Spring
+            </div>
+          </div>
+          <div class="col-10-12">
+            <div class="content">
+              <a href="https://catalogue.vassar.edu/preview_course.php?catoid=13&coid=105247">PHIL 125 - Logic</a>
+              (Vassar)
+            </div>
+          </div>
+
+        </div>
+
+
+        <br>
+
+        <h3>Awards 🏆</h3>
+        <ul>
+          <li><b>Teaching Assistant of the Year</b>, UCSB Department of Computer Science, 2025</li>
+          <li><b>Outstanding Teaching Assistant</b>, UCSB College of Engineering, 2024 <a
+              href="https://engineering.ucsb.edu/news/class-2024-selects-teaching-assistants-year">[press]</a>
+          </li>
+          <li><b>Outstanding Teaching Assistant</b>, UCSB College of Engineering, 2023 <a
+              href="https://engineering.ucsb.edu/news/class-2023-selects-teaching-assistants-year">[press]</a>
+          </li>
+        </ul>
+
+
+        <h3>Certificates and Training ✅</h3>
+        <ul>
+          <li><a href="https://otl.ucsb.edu/graduate-students/ta-certificate-programs/ccut">Certificate in College
+              and University Teaching, UCSB</a></li>
+          <li><a href="https://otl.ucsb.edu/graduate-students/ta-certificate-programs/lead-ta-institute">Lead TA
+              Institute, UCSB</a></li>
+          <li><a href="https://otl.ucsb.edu/graduate-students/ta-certificate-programs/stia">Summer
+              Teaching Institute for Associates, UCSB</a></li>
+        </ul>
+
+        <br>
+
+
+        <h2>Talks & Tutorials</h2>
+
+
+        <ul>
+          <li>Polymorphism, Curry-Howard, and Program Verification (guest lecture for CS162 @ UCSB)</li>
+          <li>Formal Verification for Zero-Knowledge Proofs (Applied ZK Workshop @ SBC'22)</li>
+          <li>Introduction to Interactive Theorem Proving in Coq (0xPARC Summer Residency 2022)</li>
+          <li>Refinement Types and Program Verification (guest lecture for CS162 @ UCSB)
+          </li>
+        </ul>
+
+
+        <br>
+
+
+
+        <h2 id="personal">Personal</h2>
+        <!-- <p>
                 I'm interested in ...
               </p> -->
-              <p>I enjoy playing music, and am currently studying the <a
-                  href='https://www.gcna.org/about-carillons'>carillon</a> with <a
-                  href='https://music.ucsb.edu/people/faculty/wesley-arai'>Wesley Arai</a>. I occasionally post
-                my progress videos <a href="https://www.youtube.com/@roly4301">here</a>.
-                Previously, I studied organ with <a href='http://www.gailarcher.com/artist.html'>Gail Archer</a>.
-                Random stuff: Solver-Aided Chorale Composition (<a href="/pdfs/choco.pdf">poster</a>).</p>
-              <p>
-                I'm a moderate weeb and speak (not so jyozu) Japanese.
-                I enjoy watching <a href="https://www.youtube.com/@sissonnelive/videos">owarai</a> and
-                <a href="/images/3x3.jpg">anime</a>,
-                listening to <a
-                  href="https://youtube.com/playlist?list=PLYpJvGKpl7tao5DG9RIaNpj9kyjv8irCV&si=j2ElqqSnmbupkc5Y">radio</a>,
-                and reading Murakami.
-              </p>
-            </td>
-          </tr>
-        </table>
+        <p>I enjoy playing music, and am currently studying the <a
+            href='https://www.gcna.org/about-carillons'>carillon</a> with <a
+            href='https://music.ucsb.edu/people/faculty/wesley-arai'>Wesley Arai</a>. I occasionally post
+          my progress videos <a href="https://www.youtube.com/@roly4301">here</a>.
+          Previously, I studied organ with <a href='http://www.gailarcher.com/artist.html'>Gail Archer</a>.
+          Random stuff: Solver-Aided Chorale Composition (<a href="/pdfs/choco.pdf">poster</a>).</p>
+        <p>
+          I'm a moderate weeb and speak (not so jyozu) Japanese.
+          I enjoy watching <a href="https://www.youtube.com/@sissonnelive/videos">owarai</a> and
+          <a href="/images/3x3.jpg">anime</a>,
+          listening to <a
+            href="https://youtube.com/playlist?list=PLYpJvGKpl7tao5DG9RIaNpj9kyjv8irCV&si=j2ElqqSnmbupkc5Y">radio</a>,
+          and reading Murakami.
+        </p>
+
 
 
         <br>
@@ -387,6 +469,7 @@
             </td>
           </tr>
         </table>
+        {% endif %}
       </td>
     </tr>
   </table>
