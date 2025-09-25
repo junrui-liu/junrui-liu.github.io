@@ -84,6 +84,8 @@
           <a href="#teaching">Teaching</a>
           &nbsp;§&nbsp;
           <a href="#personal">Personal</a>
+          &nbsp;§&nbsp;
+          <a href="#blog">Blog</a>
           <!-- &nbsp;/&nbsp;
                 <a href="https://junrui-liu.github.io"> CV </a> -->
         </p>
@@ -155,11 +157,6 @@
         <table
           style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
 
-          <!-- <tr>
-            <td style="padding:2%;padding-top:0%;padding-bottom:0%;width:75%;vertical-align:middle">
-            </td>
-          </tr> -->
-
           {% for post in site.posts %}
           {% for cat in post.categories %}
           {% if cat == 'talk' %}
@@ -191,12 +188,6 @@
         </p>
         <table
           style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
-
-          <!-- <tr>
-            <td style="padding:2%;padding-top:0%;padding-bottom:0%;width:75%;vertical-align:middle">
-              
-            </td>
-          </tr> -->
 
           {% for post in site.posts %}
           {% for cat in post.categories %}
@@ -460,6 +451,27 @@
 
 
         <br>
+
+        <h2 id="blog">Blog</h2>
+        <div class="grid grid-pad">
+          {% for post in site.posts %}
+          {% for cat in post.categories %}
+          {% if cat == 'blog' %}
+          <div class="col-2-12">
+            <div class="content">
+              {{post.date | date: "%m/%d/%Y" }}
+            </div>
+          </div>
+          <div class="col-10-12">
+            <div class="content">
+              <a href="{{post.permalink}}">{{post.title}}</a>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+          {% endfor %}
+        </div>
+
         <br>
 
         <table
