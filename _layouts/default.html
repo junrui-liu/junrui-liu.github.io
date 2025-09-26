@@ -23,8 +23,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  {% if page.layout == 'page' %}
-  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/page.css" />
+
+
+  {% if page.style %}
+  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/{{ page.style }}.css" />
   {% else %}
   <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
   {% endif %}
@@ -38,17 +40,19 @@
 
 
 <body>
+  {% if page.layout == 'page' %}
+  <!-- Post content -->
+  <!-- The page is too wide, help me narrow it down -->
+  <div style="max-width: 800px; margin: 0 auto;">
+    {{ content }}
+  </div>
+  {% else %}
   <table
     style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
     <tr style="padding:0px">
       <td style="padding:0px">
 
-        {% if page.layout == 'page' %}
-        <!-- Post content -->
-        <div style="padding:2%;width:100%;vertical-align:middle">
-          {{ content }}
-        </div>
-        {% else %}
+
         <!-- Homepage content -->
         <table
           style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
@@ -504,10 +508,10 @@
             </td>
           </tr>
         </table>
-        {% endif %}
       </td>
     </tr>
   </table>
+  {% endif %}
 </body>
 
 </html>
