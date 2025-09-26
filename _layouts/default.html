@@ -2,7 +2,12 @@
 <html lang="en">
 
 <head>
+  {% if page.layout == 'page' %}
+  <title>{{ page.title }} - {{ site.name }}</title>
+  {% else %}
   <title>{{ site.name }}</title>
+  {% endif %}
+
 
   <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 
