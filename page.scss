@@ -1,0 +1,83 @@
+---
+---
+
+//
+// IMPORTS
+//
+@import url('https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&display=swap');
+
+//@import "reset";
+//@import "variables";
+// Syntax highlighting @import is at the bottom of this file
+
+/**************/
+/* BASE RULES */
+/**************/
+a {
+  color: #1772d0;
+  text-decoration: none;
+}
+
+a:focus,
+a:hover {
+  color: #f09228;
+  text-decoration:underline;
+text-decoration-style: dotted;
+}
+
+body,
+td,
+th,
+tr,
+p,
+a {
+  font-display: auto;
+  font: 100%/1.6 'Literata', Palatino, serif;
+}
+
+
+h1, h2, h3, h4 {
+    color: #333;
+}
+
+// <weight>: Use a value from 200 to 900
+// <uniquifier>: Use a unique and descriptive class name
+
+// .literata-1 {
+//   font-family: "Literata", serif;
+//   font-optical-sizing: auto;
+// //   font-weight: <weight>;
+//   font-style: normal;
+// }
+
+
+
+.one {
+  width: 160px;
+  height: 160px;
+  position: relative;
+}
+
+.two {
+  width: 160px;
+  height: 160px;
+  position: absolute;
+  transition: opacity .2s ease-in-out;
+  -moz-transition: opacity .2s ease-in-out;
+  -webkit-transition: opacity .2s ease-in-out;
+}
+
+.fade {
+  transition: opacity .2s ease-in-out;
+  -moz-transition: opacity .2s ease-in-out;
+  -webkit-transition: opacity .2s ease-in-out;
+}
+
+span.highlight {
+  background-color: #ffffd0;
+}
+
+// Settled on moving the import of syntax highlighting to the bottom of the CSS
+// ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
+//@import "highlights";
+//@import "svg-icons";
