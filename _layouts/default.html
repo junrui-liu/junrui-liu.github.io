@@ -14,11 +14,7 @@
   <meta name="author" content="{{ site.name }}" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  {% if page.layout == 'page' %}
-  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/page.css" />
-  {% else %}
-  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
-  {% endif %}
+
 
   <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/simplegrid.css" />
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
@@ -29,6 +25,14 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,200..900;1,7..72,200..900&display=swap"
     rel="stylesheet">
+
+  {% if page.layout == 'page' %}
+  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/page.css" />
+  {% else %}
+  <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
+  {% endif %}
+
+
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?">
   <link rel="shortcut icon" href="images/favicon.ico">
 
