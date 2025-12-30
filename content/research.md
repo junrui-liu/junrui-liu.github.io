@@ -26,14 +26,20 @@ I'm interested in helping programmers build **provably correct, efficient** soft
 
 - 【ASPLOS'22】 [Tree Traversal Synthesis Using Domain-Specific Symbolic Compilation](https://dl.acm.org/doi/10.1145/3503222.3507751). Yanju Chen, *Junrui Liu*, Yu Feng, Rastislav Bodik.
 
-### Conference Presentations
-- 【SBC'25】 Tessel: An Optimizing Compiler for Efficient Zero-Knowledge Circuits. *Junrui Liu*, Jiaxin Song, Yanning Chen, Hanzhi Liu, Hongbo Wen, Yanju Chen, Yu Feng.
 
 ### Preprints
 - [A Study of HTTP/2's Server Push Performance Potential](https://doi.org/10.48550/arXiv.2207.05885). Rui Meireles, *Junrui Liu*, Peter Steenkiste.
 
 
 ### Invited Talks
+
+
+* Tessel: An Optimizing Compiler for Efficient Zero-Knowledge Circuits, *The Science of Blockchain Conference, UC Berkeley* (Aug. 2025)
+* Polymorphism, Curry-Howard, and Program Verification, *Guest Lecture for CS 162, UCSB* (Feb. 2023)
+* Formal Verification for Zero-Knowledge Proofs, *Applied ZK Workshop @ The Science of Blockchain Conference, Stanford University* (July 2022)
+* Introduction to Interactive Theorem Proving in Coq, *0xPARC Summer Residency, NYC* (July 2022)
+* Refinement Types and Program Verification, *Guest Lecture for CS 162, UCSB* (Feb. 2022)
+
 
 ### Services
 - USENIX Security'26, Artifact Evaluation Committee
