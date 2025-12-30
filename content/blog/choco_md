@@ -1,0 +1,11 @@
++++
+title = "Solver-aided chorale composition"
+date = "2022-06-11"
+# description = "Sample article showcasing basic Markdown syntax and formatting for HTML elements."
+tags = [
+    "music",
+]
+publish = false
++++
+
+A toy project I did for [CS 292C](https://github.com/fredfeng/CS292C/tree/spring-2022). ([poster](/pdfs/choco.pdf), [code](https://github.com/junrui-liu/choco)). 
