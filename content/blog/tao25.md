@@ -1,6 +1,7 @@
 +++
 title = "Running a workshop on leading computer-based labs"
 date = "2025-09-25"
+slug = "tao25"
 # description = "Sample article showcasing basic Markdown syntax and formatting for HTML elements."
 tags = [
     "teaching"
