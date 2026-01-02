@@ -22,19 +22,23 @@
 {{ end }}
 
 
-{{ if eq .Type "blog" }}{{ if (.Param "enablePostNavigator")}}
-{{- partial "post_navigator.html" . -}}
-{{ end }}{{ end }}
-
 <p>
     {{ range (.GetTerms "tags") }}
     <a href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
     {{ end }}
 </p>
+
+
+
+
+{{ if eq .Type "blog" }}
 <div class="content-spacer">
     <a href="#top" class="repeat-symbol">:||</a>
 </div>
-
+{{ if (.Param "enablePostNavigator")}}
+{{- partial "post_navigator.html" . -}}
+{{ end }}
+{{ end }}
 
 <script>
     // TOC highlighting script
