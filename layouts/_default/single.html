@@ -1,0 +1,82 @@
+{{ define "main" }}
+{{ if eq .Type "blog" }}{{ if not .Params.menu }}
+<h1 id="top">{{ .Title }}</h1>
+<p>
+    <i>
+        <time datetime='{{ .Date.Format "2006-01-02" }}'>
+            {{ .Date.Format (default "Jan 02, 2006" .Site.Params.dateFormat) }}
+        </time>
+    </i>
+</p>
+{{ end }}{{ end }}
+
+<article class="post-content">
+    {{ .Content }}
+</article>
+
+
+{{ if and (eq .Type "blog") (.TableOfContents) }}
+<aside class="post-toc">
+    {{ .TableOfContents }}
+</aside>
+{{ end }}
+
+
+{{ if eq .Type "blog" }}{{ if (.Param "enablePostNavigator")}}
+{{- partial "post_navigator.html" . -}}
+{{ end }}{{ end }}
+
+<p>
+    {{ range (.GetTerms "tags") }}
+    <a href="{{ .Permalink }}">#{{ .LinkTitle }}</a>
+    {{ end }}
+</p>
+<div class="content-spacer">
+    <a href="#top" class="repeat-symbol">:||</a>
+</div>
+
+
+<script>
+    // TOC highlighting script
+    document.addEventListener('DOMContentLoaded', function () {
+        const tocLinks = document.querySelectorAll('.post-toc a');
+        if (tocLinks.length === 0) return;
+
+        const headings = Array.from(tocLinks).map(link => {
+            const id = link.getAttribute('href').substring(1);
+            return document.getElementById(id);
+        }).filter(Boolean);
+
+        function updateActiveToc() {
+            let current = null;
+            const scrollY = window.scrollY + 100; // offset for header
+
+            for (let i = headings.length - 1; i >= 0; i--) {
+                const heading = headings[i];
+                if (heading.offsetTop <= scrollY) {
+                    current = tocLinks[i];
+                    break;
+                }
+            }
+
+            // Remove active class from all
+            tocLinks.forEach(link => link.classList.remove('active-toc'));
+
+            // Add to current
+            if (current) {
+                current.classList.add('active-toc');
+                // Scroll the TOC to show the active item if not visible
+                const toc = document.querySelector('.post-toc');
+                const rect = current.getBoundingClientRect();
+                const tocRect = toc.getBoundingClientRect();
+                if (rect.top < tocRect.top || rect.bottom > tocRect.bottom) {
+                    current.scrollIntoView({ block: 'nearest', behavior: 'auto' });
+                }
+            }
+        }
+
+        window.addEventListener('scroll', updateActiveToc);
+        updateActiveToc(); // initial call
+    });
+</script>
+{{ end }}

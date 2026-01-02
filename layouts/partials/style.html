@@ -8,11 +8,15 @@
     --heading-color: #222;
     --text-color: #444;
     --link-color: #3273dc;
+    --hover-color: #f06293;
     --visited-color: #8b6fcb;
     --blockquote-color: #222;
     --nav-active-bg-light: #007acc;
     --nav-active-bg-dark: #007acc;
     --nav-active-color: #fff;
+    --toc-border-color: #ddd;
+    --toc-text-color: #556;
+    --toc-active-bg: #f0f0f0;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -23,7 +27,14 @@
       --link-color: #8cc2dd;
       --visited-color: #8b6fcb;
       --blockquote-color: #ccc;
+      --toc-border-color: #555;
+      --toc-text-color: #aab;
+      --toc-active-bg: #333;
     }
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 
   body {
@@ -58,8 +69,7 @@
 
   a:hover {
     text-decoration: underline;
-    color: #f06293;
-    /* color: var(--text-color); */
+    color: var(--hover-color);
   }
 
   nav a {
@@ -177,5 +187,86 @@
 
   ul.blog-posts li a:visited {
     color: var(--visited-color);
+  }
+
+  .post-content {
+    flex: 1;
+  }
+
+  .content-spacer {
+    height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .repeat-symbol {
+    color: var(--toc-text-color);
+    font-size: 1.3em;
+    text-decoration: none;
+    transition: color 0.3s, background-color 0.3s;
+    padding: 10px 20px;
+    border-radius: 5px;
+  }
+
+  .repeat-symbol:hover {
+    color: var(--hover-color);
+    background-color: var(--toc-active-bg);
+    text-decoration: none;
+  }
+
+  .post-toc {
+    position: fixed;
+    right: 20px;
+    top: 140px;
+    width: 200px;
+    padding: 0 10px 10px 10px;
+    height: fit-content;
+    max-height: calc(75vh - 140px);
+    overflow-y: auto;
+    border-left: 1px solid var(--toc-border-color);
+  }
+
+  .post-toc nav ul {
+    padding-left: 0;
+    list-style: none;
+  }
+
+  .post-toc nav ul ul {
+    padding-left: 15px;
+  }
+
+  .post-toc nav ul li {
+    margin-bottom: 6px;
+  }
+
+  .post-toc nav ul li a {
+    font-size: 0.9em;
+    color: var(--toc-text-color);
+    text-decoration: none;
+    display: block;
+    padding: 2px 0;
+    transition: color 0.2s;
+  }
+
+  .post-toc nav ul li a:hover {
+    color: var(--hover-color);
+  }
+
+  .post-toc .active-toc {
+    background-color: var(--toc-active-bg);
+    border-radius: 3px;
+    padding: 2px 4px;
+    margin: -2px -4px;
+  }
+
+  .post-toc .active-toc::before {
+    content: none;
+  }
+
+  .repeat-symbol .thick {
+    font-weight: bold;
+    font-size: 1.1em;
+    /* slightly larger for thickness */
   }
 </style>
