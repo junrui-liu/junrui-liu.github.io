@@ -42,6 +42,8 @@ I'm interested in helping programmers build **provably correct, efficient** soft
 
 
 ### Services
+- PLDI'26, Artifact Evaluation Committee
+- ECOOP'26, Artifact Evaluation Committee
 - USENIX Security'26, Artifact Evaluation Committee
 - TSE'24, External Reviewer
 - PLDI'22, Student Volunteer
