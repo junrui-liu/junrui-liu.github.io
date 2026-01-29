@@ -8,7 +8,7 @@ weight = 1
 
 
 > **News**:
-> I'm on the academic job market for tenure-track faculty positions in Computer Science! Check out my [CV](/pdfs/junrui-liu-cv.pdf), [teaching statement](/pdfs/junrui-liu-teaching-statement.pdf), and [research statement](/pdfs/junrui-liu-research-statement.pdf).
+> I'm on the academic job market for tenure- and teaching-track faculty positions in Computer Science! Check out my [CV](/pdfs/junrui-liu-cv.pdf), [teaching statement](/pdfs/junrui-liu-teaching-statement.pdf), and [research statement](/pdfs/junrui-liu-research-statement.pdf).
 
 
 ### About Me
