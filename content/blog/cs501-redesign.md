@@ -1,5 +1,5 @@
 +++
-title = "Redesigning the TA Training Course for UCSB CS"
+title = "Redesigning the TA training course for UCSB CS"
 date = "2026-01-01"
 slug = "cs501-redesign"
 # description = "Sample article showcasing basic Markdown syntax and formatting for HTML elements."
