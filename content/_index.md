@@ -27,11 +27,6 @@ GitHub
 Bluesky
 <i class="fa-brands fa-bluesky" style="font-size: 0.8em;"></i></a>.
 
-### Personal
-
-I like playing music, and am currently studying the [carillon](https://dailynexus.com/interactives/storke-tower-carillon/) with [Wesley Arai](https://music.ucsb.edu/people/faculty/wesley-arai). I occasionally post my progress videos [here](https://www.youtube.com/@roly4301). Previously, I studied organ with [Gail Archer](http://www.gailarcher.com/artist.html). I'm also mildly weeb, enjoying [owarai](https://www.youtube.com/@sissonnelive/videos), [podcasts](https://youtube.com/playlist?list=PLYpJvGKpl7tao5DG9RIaNpj9kyjv8irCV&si=j2ElqqSnmbupkc5Y), and [anime](/images/3x3.jpg).
-
-
 <center>
 
 ![A picture of me six years ago](/images/me.png "A picture of me six years ago")
