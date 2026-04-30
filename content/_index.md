@@ -29,7 +29,8 @@ Bluesky
 
 <center>
 
-![A picture of me six years ago](/images/me.png "A picture of me six years ago")
+<!-- ![A picture of me six years ago](/images/me.png "A picture of me six years ago") -->
+<img src="/images/me.png" alt="<Me>" style="width: 200px; border-radius: 50%; margin-top: 20px;">
 
 </center>
 
