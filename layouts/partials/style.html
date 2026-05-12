@@ -73,22 +73,30 @@
   }
 
   nav a {
+    display: inline-block;
     margin-right: 8px;
+    padding: 3px 3px;
+    border-radius: 4px;
   }
 
   /* High-contrast highlight for the active nav item */
   nav a.active {
     background-color: var(--nav-active-bg-light);
     color: var(--nav-active-color);
-    padding: 3px 3px;
-    border-radius: 4px;
-    display: inline-block;
     box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15);
+  }
+
+  /* Fainter highlight for "you're inside this section" (e.g. an individual blog post) */
+  nav a.active-section {
+    background-color: color-mix(in srgb, var(--nav-active-bg-light) 25%, transparent);
+    color: var(--text-color);
   }
 
   /* Prevent underline on the active nav link (including hover) */
   nav a.active,
-  nav a.active:hover {
+  nav a.active:hover,
+  nav a.active-section,
+  nav a.active-section:hover {
     text-decoration: none;
   }
 
@@ -96,6 +104,10 @@
     nav a.active {
       background-color: var(--nav-active-bg-dark);
       color: var(--nav-active-color);
+    }
+    nav a.active-section {
+      background-color: color-mix(in srgb, var(--nav-active-bg-dark) 30%, transparent);
+      color: var(--text-color);
     }
   }
 
@@ -201,8 +213,12 @@
   }
 
   .repeat-symbol {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
     color: var(--toc-text-color);
     font-size: 1.3em;
+    line-height: 1;
     text-decoration: none;
     transition: color 0.3s, background-color 0.3s;
     padding: 10px 20px;
@@ -215,62 +231,93 @@
     text-decoration: none;
   }
 
-  .post-toc {
-    position: fixed;
-    right: 10px;
-    top: 140px;
-    width: 200px;
-    padding: 0 10px 10px 10px;
-    height: fit-content;
-    max-height: calc(75vh - 140px);
-    overflow-y: auto;
-    border-left: 1px solid var(--toc-border-color);
+  .repeat-symbol .dots {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.25em;
+    height: 1.1em;
+    margin-right: 1px;
   }
 
-  .post-toc nav ul {
-    padding-left: 0;
-    list-style: none;
+  .repeat-symbol .dot {
+    width: 4px;
+    height: 4px;
+    background-color: currentColor;
+    border-radius: 50%;
   }
 
-  .post-toc nav ul ul {
-    padding-left: 15px;
+  .repeat-symbol .bar {
+    display: inline-block;
+    background-color: currentColor;
+    height: 1.1em;
+    border-radius: 1px;
   }
 
-  .post-toc nav ul li {
-    margin-bottom: 6px;
-  }
-
-  .post-toc nav ul li a {
-    font-size: 0.9em;
-    color: var(--toc-text-color);
-    text-decoration: none;
-    display: block;
-    padding: 2px 4px;
-    transition: color 0.2s;
-  }
-
-  .post-toc nav ul li a:hover {
-    color: var(--hover-color);
-  }
-
-  .post-toc .active-toc {
-    background-color: var(--toc-active-bg);
-    border-radius: 3px;
-    padding: 2px 4px;
-    /* margin: -2px -4px; */
-  }
-
-  .post-toc .active-toc::before {
-    content: none;
+  .repeat-symbol .thin {
+    width: 2px;
   }
 
   .repeat-symbol .thick {
-    font-weight: bold;
-    font-size: 1.1em;
-    /* slightly larger for thickness */
+    width: 5px;
   }
 
-  @media (max-width: 1200px) {
+  .post-toc {
+    position: fixed;
+    top: 6rem;
+    left: calc(50vw + var(--width) / 2 + 2rem);
+    width: 220px;
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
+    font-size: 0.85em;
+    line-height: 1.5;
+    scrollbar-width: thin;
+    scrollbar-color: var(--toc-border-color) transparent;
+  }
+
+  .post-toc nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .post-toc nav > ul {
+    border-left: 2px solid var(--toc-border-color);
+  }
+
+  .post-toc nav li {
+    margin: 0;
+  }
+
+  .post-toc nav a {
+    display: block;
+    color: var(--toc-text-color);
+    text-decoration: none;
+    padding: 0.2rem 0.75rem;
+    margin-left: -2px;
+    border-left: 2px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+  }
+
+  .post-toc nav ul ul a {
+    padding-left: 1.5rem;
+  }
+
+  .post-toc nav ul ul ul a {
+    padding-left: 2.25rem;
+  }
+
+  .post-toc nav a:hover {
+    color: var(--hover-color);
+    text-decoration: none;
+  }
+
+  .post-toc nav a.active-toc {
+    color: var(--link-color);
+    border-left-color: var(--link-color);
+  }
+
+  @media (max-width: 1199px) {
     .post-toc {
       display: none;
     }

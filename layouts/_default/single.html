@@ -33,7 +33,9 @@
 
 {{ if eq .Type "blog" }}
 <div class="content-spacer">
-    <a href="#top" class="repeat-symbol">:||</a>
+    <a href="#top" class="repeat-symbol" aria-label="Back to top">
+        <span class="dots"><span class="dot"></span><span class="dot"></span></span><span class="bar thin"></span><span class="bar thick"></span>
+    </a>
 </div>
 {{ if (.Param "enablePostNavigator")}}
 {{- partial "post_navigator.html" . -}}
@@ -41,46 +43,52 @@
 {{ end }}
 
 <script>
-    // TOC highlighting script
-    document.addEventListener('DOMContentLoaded', function () {
-        const tocLinks = document.querySelectorAll('.post-toc a');
-        if (tocLinks.length === 0) return;
+    (function () {
+        const toc = document.querySelector('.post-toc');
+        if (!toc) return;
+        const links = Array.from(toc.querySelectorAll('a[href^="#"]'));
+        if (!links.length) return;
 
-        const headings = Array.from(tocLinks).map(link => {
-            const id = link.getAttribute('href').substring(1);
-            return document.getElementById(id);
-        }).filter(Boolean);
+        const items = links
+            .map((link) => {
+                const id = decodeURIComponent(link.hash.slice(1));
+                return { link, target: document.getElementById(id) };
+            })
+            .filter((item) => item.target);
+        if (!items.length) return;
 
-        function updateActiveToc() {
+        let activeLink = null;
+        let scheduled = false;
+
+        function update() {
+            scheduled = false;
+            const triggerY = window.scrollY + window.innerHeight * 0.25;
             let current = null;
-            const scrollY = window.scrollY + 100; // offset for header
-
-            for (let i = headings.length - 1; i >= 0; i--) {
-                const heading = headings[i];
-                if (heading.offsetTop <= scrollY) {
-                    current = tocLinks[i];
-                    break;
-                }
+            for (const item of items) {
+                const top = item.target.getBoundingClientRect().top + window.scrollY;
+                if (top <= triggerY) current = item.link;
+                else break;
             }
+            // Near the bottom of the page, lock onto the final heading.
+            const atBottom = window.scrollY + window.innerHeight >=
+                document.documentElement.scrollHeight - 4;
+            if (atBottom) current = items[items.length - 1].link;
 
-            // Remove active class from all
-            tocLinks.forEach(link => link.classList.remove('active-toc'));
-
-            // Add to current
-            if (current) {
-                current.classList.add('active-toc');
-                // Scroll the TOC to show the active item if not visible
-                const toc = document.querySelector('.post-toc');
-                const rect = current.getBoundingClientRect();
-                const tocRect = toc.getBoundingClientRect();
-                if (rect.top < tocRect.top || rect.bottom > tocRect.bottom) {
-                    current.scrollIntoView({ block: 'nearest', behavior: 'auto' });
-                }
-            }
+            if (current === activeLink) return;
+            if (activeLink) activeLink.classList.remove('active-toc');
+            if (current) current.classList.add('active-toc');
+            activeLink = current;
         }
 
-        window.addEventListener('scroll', updateActiveToc);
-        updateActiveToc(); // initial call
-    });
+        function onScroll() {
+            if (scheduled) return;
+            scheduled = true;
+            requestAnimationFrame(update);
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
+        update();
+    })();
 </script>
 {{ end }}

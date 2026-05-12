@@ -1,4 +1,9 @@
 {{ range .Site.Menus.main }}
 {{ $active := or (eq $.RelPermalink .URL) (eq $.Permalink .URL) }}
-<a href="{{ .URL }}" {{ if $active }} class="active" {{ end }}>{{ .Name }}</a>
+{{ $menuSection := trim .URL "/" }}
+{{ $sectionActive := and (not $active) (ne $menuSection "") (eq $.Section $menuSection) }}
+<a href="{{ .URL }}"
+  {{ if $active }} class="active"
+  {{ else if $sectionActive }} class="active-section"
+  {{ end }}>{{ .Name }}</a>
 {{ end }}
