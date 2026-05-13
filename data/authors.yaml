@@ -1,0 +1,50 @@
+# Author directory used by the {{< authors >}} shortcode.
+#
+# Format:
+#   "Full Name":
+#     url: https://their-website.tld/    # optional — omit to keep as plain text
+#     self: true                         # optional — italicize as the author's own name
+#
+# Only entries that appear here get linked. Unlisted names render as plain text,
+# so it's safe to add author lists before filling in URLs.
+
+"Junrui Liu":
+  self: true
+"Yu Feng":
+  url: https://fredfeng.github.io/
+"Jiaxin Song":
+  url: https://www.jiaxinsong.com/
+"Yanning Chen":
+  url: https://yanningchen.me/
+"Hanzhi Liu":
+  url: https://www.uc.sb/
+"Hongbo Wen":
+  url: https://whbjzzwjxq.github.io/
+"Luke Pearson":
+  url: https://nl.linkedin.com/in/luke-pearson-73a632182
+"Yanju Chen":
+  url: https://chyanju.github.io/
+"Jingtao Xia":
+  url: https://jingtaox.github.io/
+"Nicholas Brown":
+  url: https://www.linkedin.com/in/nicholas-o-brown
+"Ian Kretz":
+  url: https://scholar.google.com/citations?user=tUrNjFcAAAAJ&hl=en
+"Bryan Tan":
+  url: https://technius.net/
+"Jonathan Wang":
+  url: https://www.jonathanpwang.com/
+"Yi Sun":
+  url: https://yisun.io/
+"Anders Miltner":
+  url: https://www.cs.sfu.ca/~miltner/
+"Isil Dillig":
+  url: https://www.cs.utexas.edu/~isil/
+"Eric Atkinson":
+  url: https://eatkinson.ca/
+"Rastislav Bodik":
+  url: https://homes.cs.washington.edu/~bodik/
+"Rui Meireles":
+  url: https://www.cs.vassar.edu/~rpachecomeireles/
+"Peter Steenkiste":
+  url: https://www.cs.cmu.edu/~prs/

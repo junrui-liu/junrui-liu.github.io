@@ -15,7 +15,8 @@ I am a 5th-year Computer Science PhD student at [UC Santa Barbara](https://www.u
 
 
 ### Contact
-I can be reached via [email](https://mailhide.io/en/e/qzWe0mau).
+<!-- I borrowed the email hiding trick from Alex Ozdemir: https://cs.stanford.edu/~aozdemir/ -->
+I can be reached via email at <span class="email" data-cipher="f4umFKJr/1MHrxrMxArajw==" tabindex="0">(hover to reveal)</span>.
 You can also find me on
 <a target="_blank" rel="noopener noreferrer" href="https://scholar.google.com/citations?user=DWWFQkkAAAAJ">
 Google Scholar

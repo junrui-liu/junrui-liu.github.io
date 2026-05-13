@@ -1,54 +1,94 @@
 <style>
   :root {
     --width: 720px;
-    --font-main: Verdana, sans-serif;
-    --font-secondary: Verdana, sans-serif;
-    --font-scale: 1em;
-    --background-color: #fff;
-    --heading-color: #222;
-    --text-color: #444;
-    --link-color: #3273dc;
-    --hover-color: #f4810f;
-    --visited-color: #8b6fcb;
-    --blockquote-color: #222;
-    --nav-active-bg-light: #007acc;
-    --nav-active-bg-dark: #007acc;
-    --nav-active-color: #fff;
-    --toc-border-color: #ddd;
-    --toc-text-color: #556;
-    --toc-active-bg: #f0f0f0;
+
+    --font-body: 'Literata', Charter, 'Iowan Old Style', 'Apple Garamond',
+      Cambria, Georgia, serif;
+    --font-display: 'Fraunces', 'Literata', Charter, 'Iowan Old Style',
+      Cambria, Georgia, serif;
+    --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui,
+      Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Monaco, Consolas,
+      'Liberation Mono', monospace;
+
+    --font-scale: 18px;
+    --line-height: 1.7;
+
+    /* Warm "paper" palette, Cal Poly green + gold accents */
+    --background-color: #fdfbf6;
+    --surface-color: #f4efe4;
+    --border-color: #e8e0d1;
+    --heading-color: #1c1814;
+    --text-color: #3f3a33;
+    --muted-color: #8a8170;
+    --link-color: #154734;
+    /* Cal Poly Green */
+    --hover-color: #bd8b13;
+    /* Cal Poly Gold */
+    --visited-color: #4a6b53;
+    /* desaturated green */
+    --blockquote-color: #5b554b;
+    --accent-soft: #ece9da;
+    --accent-gold-soft: #f3e9c8;
+
+    --nav-active-bg-light: #154734;
+    --nav-active-color: #fdfbf6;
+
+    --toc-border-color: #e2d9c5;
+    --toc-text-color: #8a8170;
+    --toc-active-bg: #ede7d4;
   }
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --background-color: #01242e;
-      --heading-color: #eee;
-      --text-color: #ddd;
-      --link-color: #8cc2dd;
-      --visited-color: #8b6fcb;
-      --blockquote-color: #ccc;
-      --toc-border-color: #555;
-      --toc-text-color: #aab;
-      --toc-active-bg: #333;
+      /* Warm dark — like reading by lamplight */
+      --background-color: #1a1714;
+      --surface-color: #25201b;
+      --border-color: #34302a;
+      --heading-color: #f5efe4;
+      --text-color: #d9d2c4;
+      --muted-color: #9b9080;
+      --link-color: #8fc8a8;
+      /* light Cal Poly green */
+      --hover-color: #e3bd5a;
+      /* light Cal Poly gold */
+      --visited-color: #b8a880;
+      --blockquote-color: #b3a995;
+      --accent-soft: #2a241e;
+      --accent-gold-soft: #332a1a;
+
+      --nav-active-bg-light: #8fc8a8;
+      --nav-active-color: #1a1714;
+
+      --toc-border-color: #34302a;
+      --toc-text-color: #9b9080;
+      --toc-active-bg: #2d271f;
     }
   }
 
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
-    font-family: var(--font-secondary);
+    font-family: var(--font-body);
     font-size: var(--font-scale);
+    font-weight: 420;
+    line-height: var(--line-height);
     margin: auto;
-    padding: 20px;
+    padding: 36px 24px 80px;
     max-width: var(--width);
     text-align: left;
     background-color: var(--background-color);
+    color: var(--text-color);
     word-wrap: break-word;
     overflow-wrap: break-word;
-    line-height: 1.5;
-    color: var(--text-color);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'kern', 'liga', 'onum';
+    font-variant-numeric: oldstyle-nums;
+    font-variation-settings: 'opsz' 18;
   }
 
   h1,
@@ -57,156 +97,427 @@
   h4,
   h5,
   h6 {
-    font-family: var(--font-main);
+    font-family: var(--font-display);
     color: var(--heading-color);
+    line-height: 1.15;
+    letter-spacing: -0.012em;
+    margin: 1.9em 0 0.55em;
+    font-variant-numeric: normal;
+    font-variation-settings: 'opsz' 36, 'SOFT' 50;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    font-weight: 600;
+    letter-spacing: -0.022em;
+    margin-top: 0.3em;
+    margin-bottom: 0.5em;
+    font-variation-settings: 'opsz' 72, 'SOFT' 80;
+  }
+
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 2.2em;
+    font-variation-settings: 'opsz' 30, 'SOFT' 60;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-variation-settings: 'opsz' 24, 'SOFT' 50;
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-size: 1.04rem;
+    font-weight: 600;
+    font-variation-settings: 'opsz' 18, 'SOFT' 40;
+  }
+
+  p {
+    margin: 0 0 1.1em;
+  }
+
+  em,
+  i {
+    font-style: italic;
   }
 
   a {
     color: var(--link-color);
     cursor: pointer;
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--link-color) 35%, transparent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: color 0.15s ease, text-decoration-color 0.15s ease;
   }
 
   a:hover {
-    text-decoration: underline;
     color: var(--hover-color);
+    text-decoration-color: currentColor;
   }
 
-  nav a {
-    display: inline-block;
-    margin-right: 8px;
-    padding: 3px 3px;
-    border-radius: 4px;
+  /* Hover-to-reveal email placeholder */
+  span.email[data-cipher] {
+    cursor: help;
+    color: var(--muted-color);
+    transition: color 0.15s ease;
   }
 
-  /* High-contrast highlight for the active nav item */
-  nav a.active {
-    background-color: var(--nav-active-bg-light);
-    color: var(--nav-active-color);
-    box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15);
+  span.email[data-cipher]:hover {
+    color: var(--link-color);
   }
 
-  /* Fainter highlight for "you're inside this section" (e.g. an individual blog post) */
-  nav a.active-section {
-    background-color: color-mix(in srgb, var(--nav-active-bg-light) 25%, transparent);
-    color: var(--text-color);
+  /* Author-name links: blend with surrounding text, reveal on hover */
+  a.author-link,
+  a.author-link:visited {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.15s ease;
   }
 
-  /* Prevent underline on the active nav link (including hover) */
-  nav a.active,
-  nav a.active:hover,
-  nav a.active-section,
-  nav a.active-section:hover {
+  a.author-link:hover {
+    color: var(--link-color);
     text-decoration: none;
   }
 
-  @media (prefers-color-scheme: dark) {
-    nav a.active {
-      background-color: var(--nav-active-bg-dark);
-      color: var(--nav-active-color);
-    }
-    nav a.active-section {
-      background-color: color-mix(in srgb, var(--nav-active-bg-dark) 30%, transparent);
-      color: var(--text-color);
-    }
+  /* ----- Header / top nav ----- */
+  header {
+    margin-bottom: 2.5em;
+    padding-bottom: 0.5em;
   }
 
-  strong,
-  b {
-    color: var(--heading-color);
-  }
-
-  button {
+  .title h2 {
+    font-family: var(--font-display);
+    font-size: 1.55rem;
+    font-weight: 600;
     margin: 0;
-    cursor: pointer;
+    letter-spacing: -0.02em;
+    font-variation-settings: 'opsz' 36, 'SOFT' 90;
   }
 
-  time {
-    font-family: monospace;
-    font-style: normal;
-    font-size: 15px;
+  .title h2::after {
+    content: none;
   }
 
-  main {
-    line-height: 1.6;
-  }
-
-  table {
-    width: 100%;
-  }
-
-  hr {
-    border: 0;
-    border-top: 1px dashed;
-  }
-
-  img {
-    max-width: 100%;
-  }
-
-  code {
-    font-family: monospace;
-    padding: 2px;
-    border-radius: 3px;
-  }
-
-  blockquote {
-    border-left: 1px solid #999;
-    color: var(--blockquote-color);
-    padding-left: 20px;
-    font-style: italic;
-  }
-
-  footer {
-    padding: 25px 0;
-    font-size: 0.9em;
-    text-align: center;
+  .title {
+    text-decoration: none;
   }
 
   .title:hover {
     text-decoration: none;
   }
 
-  .title h1 {
-    font-size: 1.5em;
+  header nav {
+    margin-top: 0.7em;
+    margin-left: -10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    font-family: var(--font-ui);
   }
 
+  header nav a {
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    padding: 4px 10px;
+    border-radius: 6px;
+    color: var(--muted-color);
+    font-size: 0.92em;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  }
+
+  /* Gold underline marks the active page (and the active section). No underline on hover —
+     hover is signaled by the pill background instead. */
+  header nav a::after {
+    content: '';
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 1px;
+    height: 0;
+    border-top: 2px solid var(--hover-color);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-top-width 0.15s ease;
+  }
+
+  header nav a.active::after,
+  header nav a.active-section::after {
+    transform: scaleX(1);
+  }
+
+  header nav a.active::after {
+    border-top-width: 3px;
+  }
+
+  /* Turnstile (⊢) wipes in from the left on hover and on the active page */
+  header nav a::before {
+    content: "\22A2";
+    display: inline-block;
+    width: 0;
+    margin-right: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    line-height: 1;
+    vertical-align: -0.08em;
+    font-weight: 600;
+    transition: width 0.2s ease, margin-right 0.2s ease;
+  }
+
+  header nav a:hover::before,
+  header nav a.active::before,
+  header nav a.active-section::before {
+    width: 0.85em;
+    margin-right: 4px;
+  }
+
+  header nav a:hover {
+    background-color: var(--accent-gold-soft);
+    color: var(--link-color);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+
+  header nav a.active,
+  header nav a.active:hover {
+    background-color: transparent;
+    color: var(--link-color);
+    font-weight: 600;
+  }
+
+  header nav a.active-section,
+  header nav a.active-section:hover {
+    background-color: transparent;
+    color: var(--link-color);
+  }
+
+  /* ----- Inline elements ----- */
+  strong,
+  b {
+    color: var(--heading-color);
+    font-weight: 600;
+  }
+
+  small {
+    font-family: var(--font-ui);
+    font-size: 0.82em;
+    color: var(--muted-color);
+    line-height: 1.4;
+  }
+
+  time {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-style: normal;
+    font-size: 0.82em;
+    color: var(--muted-color);
+    letter-spacing: 0;
+  }
+
+  /* post date wrapper — kill the surrounding italic on the meta line */
+  main>p>i {
+    font-style: normal;
+  }
+
+  main {
+    line-height: var(--line-height);
+  }
+
+  /* ----- Tables ----- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.25em 0;
+    font-size: 0.94em;
+  }
+
+  th,
+  td {
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  th {
+    color: var(--heading-color);
+    font-weight: 600;
+    font-family: var(--font-ui);
+  }
+
+  hr {
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    margin: 2.2em auto;
+    width: 60%;
+  }
+
+  img {
+    max-width: 100%;
+    border-radius: 4px;
+  }
+
+  /* ----- Code ----- */
+  code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    padding: 0.12em 0.4em;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+  }
+
+  pre {
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    line-height: 1.55;
+    font-size: 0.85em;
+  }
+
+  pre code {
+    padding: 0;
+    background: none;
+    border: none;
+    border-radius: 0;
+    font-size: 1em;
+  }
+
+  .highlight {
+    border-radius: 6px;
+    margin: 1.4em 0;
+    overflow: hidden;
+  }
+
+  .highlight pre {
+    margin: 0;
+  }
+
+  /* ----- Blockquote ----- */
+  blockquote {
+    border-left: 2px solid var(--border-color);
+    color: var(--blockquote-color);
+    padding: 0.1em 0 0.1em 1.4em;
+    margin: 1.4em 0;
+    font-style: italic;
+  }
+
+  blockquote p {
+    margin-bottom: 0.6em;
+  }
+
+  blockquote p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* ----- Lists ----- */
+  ul,
+  ol {
+    padding-left: 1.4em;
+  }
+
+  li {
+    margin: 0.3em 0;
+  }
+
+  li>p {
+    margin: 0.3em 0;
+  }
+
+  /* ----- Footer ----- */
+  footer {
+    margin-top: 4em;
+    padding: 25px 0;
+    font-size: 0.85em;
+    font-family: var(--font-ui);
+    text-align: center;
+    color: var(--muted-color);
+    border-top: 1px solid var(--border-color);
+  }
+
+  /* ----- Misc utilities ----- */
   .inline {
     width: auto !important;
   }
 
-  .highlight,
-  .code {
-    border-radius: 3px;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    overflow-x: auto;
-  }
-
-  /* blog post list */
+  /* ----- Blog post list ----- */
   ul.blog-posts {
     list-style-type: none;
-    padding: unset;
+    padding: 0;
+    margin: 1.2em 0;
   }
 
   ul.blog-posts li {
     display: flex;
+    align-items: baseline;
+    gap: 1.2em;
+    padding: 4px 0;
+    margin: 0;
   }
 
   ul.blog-posts li span {
-    flex: 0 0 130px;
+    flex: 0 0 110px;
+    color: var(--muted-color);
+  }
+
+  ul.blog-posts li span i {
+    font-style: normal;
+  }
+
+  ul.blog-posts li a {
+    text-decoration: none;
+  }
+
+  ul.blog-posts li a:hover {
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 
   ul.blog-posts li a:visited {
     color: var(--visited-color);
   }
 
+  /* ----- Tags row (the <p> after the article body) ----- */
+  article+p a {
+    display: inline-block;
+    margin: 0 4px 6px 0;
+    padding: 3px 10px;
+    background-color: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    font-family: var(--font-ui);
+    font-size: 0.8em;
+    font-weight: 500;
+    color: var(--muted-color);
+    text-decoration: none;
+    transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+  }
+
+  article+p a:hover {
+    background-color: var(--accent-gold-soft);
+    color: var(--link-color);
+    border-color: var(--hover-color);
+    text-decoration: none;
+    transform: translateY(-1px);
+  }
+
+  /* ----- Article body container ----- */
   .post-content {
     flex: 1;
   }
 
+  /* Spacer + back-to-top symbol */
   .content-spacer {
-    height: 40vh;
+    height: 28vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -216,13 +527,13 @@
     display: inline-flex;
     align-items: center;
     gap: 3px;
-    color: var(--toc-text-color);
+    color: var(--muted-color);
     font-size: 1.3em;
     line-height: 1;
     text-decoration: none;
-    transition: color 0.3s, background-color 0.3s;
+    transition: color 0.2s ease, background-color 0.2s ease;
     padding: 10px 20px;
-    border-radius: 5px;
+    border-radius: 8px;
   }
 
   .repeat-symbol:hover {
@@ -262,6 +573,7 @@
     width: 5px;
   }
 
+  /* ----- Table of contents ----- */
   .post-toc {
     position: fixed;
     top: 6rem;
@@ -269,10 +581,18 @@
     width: 220px;
     max-height: calc(100vh - 8rem);
     overflow-y: auto;
-    font-size: 0.85em;
+    font-family: var(--font-ui);
+    font-size: 0.82em;
     line-height: 1.5;
     scrollbar-width: thin;
     scrollbar-color: var(--toc-border-color) transparent;
+  }
+
+  .post-toc nav {
+    margin: 0;
+    display: block;
+    gap: 0;
+    font-family: var(--font-ui);
   }
 
   .post-toc nav ul {
@@ -281,7 +601,7 @@
     margin: 0;
   }
 
-  .post-toc nav > ul {
+  .post-toc nav>ul {
     border-left: 2px solid var(--toc-border-color);
   }
 
@@ -292,10 +612,14 @@
   .post-toc nav a {
     display: block;
     color: var(--toc-text-color);
+    background: none;
     text-decoration: none;
     padding: 0.2rem 0.75rem;
-    margin-left: -2px;
+    margin: 0 0 0 -2px;
     border-left: 2px solid transparent;
+    border-radius: 0;
+    font-size: 1em;
+    font-weight: 400;
     transition: color 0.15s ease, border-color 0.15s ease;
   }
 
@@ -309,12 +633,15 @@
 
   .post-toc nav a:hover {
     color: var(--hover-color);
+    background: none;
     text-decoration: none;
   }
 
-  .post-toc nav a.active-toc {
+  .post-toc nav a.active-toc,
+  .post-toc nav a.active-toc:hover {
     color: var(--link-color);
     border-left-color: var(--link-color);
+    background: none;
   }
 
   @media (max-width: 1199px) {

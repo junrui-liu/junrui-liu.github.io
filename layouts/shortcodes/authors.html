@@ -1,0 +1,32 @@
+{{- /*
+  {{< authors "Name1, Name2+, Name3" >}}
+    - Looks each name up in data/authors.yaml.
+    - "self: true" in the data entry italicizes the name (e.g. the author's own name).
+    - A trailing "+" on a name renders as a <sup>+</sup> for equal-contribution markers.
+    - Unlisted names render as plain text (no link, no italics).
+*/ -}}
+{{- $authors := hugo.Data.authors -}}
+{{- $input := .Get 0 -}}
+{{- $parts := split $input "," -}}
+{{- range $i, $part := $parts -}}
+  {{- if $i -}}, {{ end -}}
+  {{- $name := trim $part " " -}}
+  {{- $eq := false -}}
+  {{- if hasSuffix $name "+" -}}
+    {{- $name = strings.TrimSuffix "+" $name -}}
+    {{- $name = trim $name " " -}}
+    {{- $eq = true -}}
+  {{- end -}}
+  {{- $entry := index $authors $name -}}
+  {{- $url := "" -}}
+  {{- $self := false -}}
+  {{- with $entry -}}
+    {{- $url = .url -}}
+    {{- $self = .self -}}
+  {{- end -}}
+  {{- if $self -}}<em>{{- end -}}
+  {{- if $url -}}<a class="author-link" href="{{ $url }}">{{ $name }}</a>
+  {{- else -}}{{ $name }}{{- end -}}
+  {{- if $self -}}</em>{{- end -}}
+  {{- if $eq -}}<sup>+</sup>{{- end -}}
+{{- end -}}
