@@ -37,10 +37,26 @@ I enjoy playing music, and am currently studying the [carillon](https://dailynex
 </center> -->
 
 <center>
-あ
+<button type="button" class="char-flip" aria-label="Flip character" onclick="flipChar(this)">あ</button>
 </center>
+<script>
+  (function () {
+    const chars = ['あ', 'A', '阿', '아'];
+    window.flipChar = function (btn) {
+      if (btn.classList.contains('flipping')) return;
+      btn.classList.add('flipping');
+      // Swap the visible character while the button is edge-on (mid-rotation).
+      setTimeout(() => {
+        const i = (parseInt(btn.dataset.idx || '0', 10) + 1) % chars.length;
+        btn.textContent = chars[i];
+        btn.dataset.idx = i;
+      }, 300);
+      setTimeout(() => btn.classList.remove('flipping'), 600);
+    };
+  })();
+</script>
 
-I also like learning languages. I studied Japanese in college and subsequently passed the JLPT N1 exam. I am mildly weeb, enjoying [owarai](https://www.youtube.com/@sissonnelive/videos), [podcasts](https://youtube.com/playlist?list=PLYpJvGKpl7tao5DG9RIaNpj9kyjv8irCV&si=j2ElqqSnmbupkc5Y), and [anime](/images/3x3.jpg). Currently learning Korean!
+I also like learning languages. I studied Japanese in college and subsequently passed the JLPT N1 exam. I am mildly weeb, enjoying [owarai](https://www.youtube.com/@sissonnelive/videos), [podcasts](https://youtube.com/playlist?list=PLYpJvGKpl7tao5DG9RIaNpj9kyjv8irCV&si=j2ElqqSnmbupkc5Y), and [anime](/images/3x3.jpg).
 
 <!-- <center>
 <img src="/images/middlebury.jpg" alt="Middlebury" title="Middlebury" height="300">
