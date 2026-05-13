@@ -27,7 +27,7 @@ I'm interested in helping programmers build **provably correct, efficient** soft
 
 - [**Certifying Zero-Knowledge Circuits with Refinement Types**](https://doi.org/10.1109/SP54263.2024.00078)  
   {{< authors "Junrui Liu, Ian Kretz, Hanzhi Liu, Bryan Tan, Jonathan Wang, Yi Sun, Luke Pearson, Anders Miltner, Isil Dillig, Yu Feng" >}}  
-  <small>IEEE S&P 2024</small>
+  <small>S&P (Oakland) 2024</small>
 
 - [**Conflict-Driven Synthesis for Layout Engines**](https://dl.acm.org/doi/10.1145/3591246)  
   {{< authors "Junrui Liu, Yanju Chen, Eric Atkinson, Yu Feng, Rastislav Bodik" >}}  
@@ -46,7 +46,7 @@ I'm interested in helping programmers build **provably correct, efficient** soft
 
 - [**A Study of HTTP/2's Server Push Performance Potential**](https://doi.org/10.48550/arXiv.2207.05885)  
   {{< authors "Rui Meireles, Junrui Liu, Peter Steenkiste" >}}  
-  <small>arXiv, 2022</small>
+  <small>arXiv</small>
 
 
 ### Invited Talks
@@ -73,7 +73,7 @@ I'm interested in helping programmers build **provably correct, efficient** soft
   <small>PLDI 2026 · ECOOP 2026 · USENIX Security 2026</small>
 
 - **External Reviewer**  
-  <small>ISSTA 2026 · USENIX Security 2026 · IEEE TSE 2024</small>
+  <small>ISSTA 2026 · USENIX Security 2026 · TSE 2024</small>
 
 - **Student Volunteer**  
   <small>PLDI 2022</small>
