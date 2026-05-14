@@ -19,8 +19,8 @@ weight = 20
 
 ### Teaching Assistant 🧑‍💻
 
-- **Lead TA**, UCSB Computer Science Department  
-  <small>[2025–26 academic year](https://junrui-liu.github.io/cs501/)</small>
+- [**Lead TA**](https://otl.ucsb.edu/graduate-students/ta-certificate-programs/lead-ta-institute), UCSB Computer Science Department  
+  <small>2025–26 academic year</small>
 
 - **CS 160 — Compilers**  
   <small>[Spring 2025](https://ucsb.instructure.com/courses/26675) · [Spring 2023](https://github.com/junrui-liu/CS160-TA) · [Fall 2021](https://github.com/junrui-liu/CS160-TA/tree/fall-2021)</small>

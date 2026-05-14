@@ -5,24 +5,38 @@ weight = 30
 +++
 
 <center>
-<button class="bell-btn" type="button" aria-label="Play or stop chime" onclick="toggleChime(this)">🔔</button>
-<audio id="chime-audio" src="/audio/waltz.mp3" preload="metadata"></audio>
+<span class="bell-wrap"><button class="bell-btn" type="button" aria-label="Bell" onclick="bellClick(this)">🔔</button><span class="bell-msg" aria-live="polite"></span></span>
 </center>
+<audio id="chime-audio" src="/audio/waltz.mp3" preload="metadata" style="display:none"></audio>
 <script>
-  function toggleChime(btn) {
-    const a = document.getElementById('chime-audio');
-    if (a.paused) {
-      a.currentTime = 0;
-      a.play();
+  function bellClick(btn) {
+    const msg = document.querySelector('.bell-msg');
+    const audio = document.getElementById('chime-audio');
+    const state = btn.dataset.state || 'idle';
+    if (state === 'idle') {
+      btn.dataset.state = 'primed';
+      btn.classList.add('primed');
+      msg.textContent = 'ring me!';
+    } else if (state === 'primed') {
+      btn.dataset.state = 'playing';
+      btn.classList.remove('primed');
       btn.classList.add('playing');
+      audio.currentTime = 0;
+      audio.play();
+      msg.textContent = 'click again to shush me...';
     } else {
-      a.pause();
-      a.currentTime = 0;
+      btn.dataset.state = 'idle';
       btn.classList.remove('playing');
+      audio.pause();
+      audio.currentTime = 0;
+      msg.textContent = '';
     }
   }
   document.getElementById('chime-audio').addEventListener('ended', () => {
-    document.querySelector('.bell-btn').classList.remove('playing');
+    const btn = document.querySelector('.bell-btn');
+    btn.dataset.state = 'idle';
+    btn.classList.remove('playing');
+    document.querySelector('.bell-msg').textContent = '';
   });
 </script>
 
