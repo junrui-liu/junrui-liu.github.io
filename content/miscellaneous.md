@@ -40,7 +40,7 @@ weight = 30
   });
 </script>
 
-I enjoy playing music. I play the [carillon](https://dailynexus.com/interactives/storke-tower-carillon/) and am a Carillonneur member of the [Guild of Carillonneurs in North America (GCNA)](https://www.gcna.org/), having recently passed the [GCNA Carillonneur Exam](https://www.gcna.org/exam-carillonneur). I learned to play the instrument under [Wesley Arai](https://music.ucsb.edu/people/faculty/wesley-arai) at UCSB. You can find my progress videos and recordings [here](https://www.youtube.com/@roly4301). Previously, I studied organ with [Gail Archer](http://www.gailarcher.com/artist.html) at [Vassar](https://miscellanynews.org/2023/03/29/opinions/goodbye-vassar-organs-hello-panda-express/). 
+I enjoy playing music. I play the [carillon](https://www.gcna.org/about-carillons) and am a Carillonneur member of the [Guild of Carillonneurs in North America (GCNA)](https://www.gcna.org/), having recently passed the [GCNA Carillonneur Exam](https://www.gcna.org/exam-carillonneur). I am fortunate to study the instrument with [Wesley Arai](https://music.ucsb.edu/people/faculty/wesley-arai) at UCSB, playing the [Storke Tower carillon](https://dailynexus.com/interactives/storke-tower-carillon/). You can find my progress videos and recordings [here](https://www.youtube.com/@roly4301). Previously, I studied organ with [Gail Archer](http://www.gailarcher.com/artist.html) at [Vassar](https://miscellanynews.org/2023/03/29/opinions/goodbye-vassar-organs-hello-panda-express/).
 <!-- Even earlier, I studied piano as a child and (very superficially) dabbled in harp and violin. -->
 
 
