@@ -11,12 +11,15 @@ weight = 1
 
 
 
-I am a 5th-year Computer Science PhD student at [UC Santa Barbara](https://www.ucsb.edu/), advised by [Yu Feng](https://fredfeng.github.io/). I'm broadly interested in helping programmers build provably correct and efficient software, using techniques from [programming languages](https://en.wikipedia.org/wiki/Programming_language_theory) and [formal methods](https://en.wikipedia.org/wiki/Formal_methods). Prior to this, I got my undergraduate degree from [Vassar College](https://www.vassar.edu/computerscience), and my M.S. from [Yale University](https://engineering.yale.edu/academic-study/departments/computer-science).
+I am an incoming Assistant Professor of [Computer
+Science](https://csc.calpoly.edu/) at [Cal Poly](https://www.calpoly.edu/). I am broadly interested in helping programmers build **provably correct** and **performant** software, using techniques from [programming languages](https://en.wikipedia.org/wiki/Programming_language_theory) and [formal methods](https://en.wikipedia.org/wiki/Formal_methods).
+
+I received my Ph.D. from [UC Santa Barbara](https://www.ucsb.edu/), advised by [Yu Feng](https://fredfeng.github.io/). Prior to that, I obtained my undergraduate degree at [Vassar College](https://www.vassar.edu/computerscience) and my M.S. from [Yale University](https://engineering.yale.edu/academic-study/departments/computer-science).
 
 
 ### Contact
 <!-- I borrowed the email hiding trick from Alex Ozdemir: https://cs.stanford.edu/~aozdemir/ -->
-I can be reached via email at <span class="email" data-cipher="f4umFKJr/1MHrxrMxArajw==" tabindex="0">(hover to reveal)</span>.
+I can be reached via email at <span class="email" data-cipher="iEVPf4+NK9LcvPt4qziFKXZSSsy1LT49CxRe9x+1E10=" tabindex="0">(hover to reveal)</span>.
 You can also find me on
 <a target="_blank" rel="noopener noreferrer" href="https://scholar.google.com/citations?user=DWWFQkkAAAAJ">
 Google Scholar

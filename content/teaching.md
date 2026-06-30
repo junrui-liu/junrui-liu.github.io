@@ -37,7 +37,7 @@ weight = 20
 
 ### Awards 🏆
 
-- **Outstanding Teaching Assistant**  
+- [**Outstanding Teaching Assistant**](https://cs.ucsb.edu/index.php/happenings/announcement/ucsb-computer-science-celebrates-2026-academic-senate-award-recipients)  
   <small>UCSB Academic Senate · 2026</small>
 
 - **Teaching Assistant of the Year**  
