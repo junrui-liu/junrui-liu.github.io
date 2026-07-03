@@ -18,7 +18,7 @@ The tool is written in [Rosette](https://emina.github.io/rosette/), a really coo
 
 A chorale typically consists of four independent *voices*. Each voice is a sequence of *notes* drawn from a fixed collection known as a *scale*. At each time step, the set of notes across all voices forms a *chord*, and the evolution of chords over time is called a *progression*.
 
-![Diagram of a chorale: four voices unfold over time; at each time step the notes across all voices form a chord, and the sequence of chords forms a progression](/images/choco-progression.png)
+{{< themed-img light="/images/choco-progression-light.png" dark="/images/choco-progression-dark.png" alt="Diagram of a chorale: four voices unfold over time; at each time step the notes across all voices form a chord, and the sequence of chords forms a progression" >}}
 
 ## How Choco works
 
@@ -28,7 +28,7 @@ A sketch is a partial chorale that contains a combination of *concrete* notes an
 
 In the sketch below, the user specifies a concrete top voice (the melody they want), while all remaining voices are symbolic. The user also fixes progression's first and last chords using Roman numerals (I and V), while all chords in between are yet-to-be-determined:
 
-![A chorale sketch: a concrete melody on the top staff, empty lower voices, and a progression reading I, six question marks, V](/images/choco-sketch.png)
+{{< themed-img light="/images/choco-sketch-light.png" dark="/images/choco-sketch-dark.png" alt="A chorale sketch: a concrete melody on the top staff, empty lower voices, and a progression reading I, six question marks, V" >}}
 
 ### 2. Syntax rules become logical predicates
 
@@ -37,7 +37,7 @@ Choco encodes the syntactic rules of classical harmony as logical predicates ove
 - (Harmony) Every voice must be in harmony with the current chord: each note must match some [pitch class](https://en.wikipedia.org/wiki/Pitch_class) of the chord.
 - (No voice crossing) Voices cannot "cross" each other between adjacent time steps: if one voice sits above another now, it must remain above at the next step.
 
-![The two rules as logical predicates: the harmony rule, ∀n ∈ V. ∃pc ∈ C. n ≡ pc, marked with a green check; the voice-crossing rule, ∀n, m ∈ Vₜ × Vₜ₊₁. V(n) < V(m) ⟹ n < m, marked with a red cross](/images/choco-rules.png)
+{{< themed-img light="/images/choco-rules-light.png" dark="/images/choco-rules-dark.png" alt="The two rules as logical predicates: the harmony rule, ∀n ∈ V. ∃pc ∈ C. n ≡ pc, marked with a green check; the voice-crossing rule, ∀n, m ∈ Vₜ × Vₜ₊₁. V(n) < V(m) ⟹ n < m, marked with a red cross" >}}
 
 ### 3. Angelic execution fills the sketch
 
@@ -50,7 +50,7 @@ Finally, we ask the solver to fill the holes in a way that satisfies all of the 
 
 Given the sketch above (a concrete melody bookended by I and V), Choco fleshes it out into a complete four-voice chorale:
 
-![The completed chorale: all four voices filled in, with the progression I, V⁷/iv, iv⁶₄, V⁶₄, V⁶₅/ii, ii, I, V](/images/choco-result.png)
+{{< themed-img light="/images/choco-result-light.png" dark="/images/choco-result-dark.png" alt="The completed chorale: all four voices filled in, with the progression I, V⁷/iv, iv⁶₄, V⁶₄, V⁶₅/ii, ii, I, V" >}}
 
 ## Optimizations
 

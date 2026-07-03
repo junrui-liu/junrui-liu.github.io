@@ -33,10 +33,10 @@ The rest of this blog is organized as follows:
 ### What TAs Do (at UCSB CS)
 
 At UCSB, teaching assistants are graduate students (MS or PhD) who support the instructional mission of our undergraduate courses. In the CS department, courses typically have high enrollment with only one primary instructor. 
-![Student-to-Instructor Ratio](https://i.imgur.com/fWPA4pG.png)
+{{< slide-img src="/images/cs501-ta-ratio.png" alt="Slide titled 'TAs are the last line of defense', contrasting one instructor for about 91 students with one TA for 10 to 30 students" >}}
 
 Because one-on-one interaction with the professor is a limited resource, TAs serve as the primary contact point between the students and the instructional team. Moreover, due to the high student-to-instructor ratio at UCSB, TAs often bear a significant portion of the teaching load. The following diagram, provided by the UCSB Office of Teaching and Learning, shows a detailed breakdown of these responsibilities:
-![TA Responsibilities](https://i.imgur.com/ExWApbr.png)
+{{< slide-img src="/images/cs501-ta-responsibilities.png" alt="Venn diagram of instructor and teaching assistant responsibilities: instructors write the syllabus, design assessments, and lecture; TAs grade, run sections, and support students; negotiated duties in the overlap include office hours, guest lectures, and co-designed assessments" >}}
 
 I want to focus on the following five tasks, which I believe are the most critical for CS TAs:
 
@@ -66,13 +66,13 @@ By moving through this cycle (**teach → feedback → reflect → improve**) we
 
 Before diving into the redesign, it helps to understand the audience. Interestingly, CS 501 is mostly taken by students who are not *yet* TAs. This Fall, of the 45 students enrolled, only 11 held a concurrent TA position.
 
-![CS 501 Enrollment Breakdown](https://i.imgur.com/MPK4uvt.png)
+{{< themed-img light="/images/cs501-enrollment-light.png" dark="/images/cs501-enrollment-dark.png" alt="Pie chart answering 'Are you currently a TA?': 77.3% no, 22.7% yes, out of 44 responses" >}}
 
 This has a huge implication for the course design: teaching is a hands-on skill that requires practice. Because most students don't have a real classroom yet, we have to create a simulated environment where they can "get their hands dirty" and practice what they’ve learned.
 
 The demographics are also unique:
 
-![CS 501 Student Demographics](https://i.imgur.com/Ssmcqny.png)
+{{< themed-img light="/images/cs501-demographics-light.png" dark="/images/cs501-demographics-dark.png" alt="Pie chart answering 'Which CS program are you in?': PhD 45.5%, BSMS 43.2%, MS 11.4%, out of 44 responses" >}}
 
 * **MS and BS/MS Students (approx. 55%):** Many are former UCSB undergraduates who already understand the local "TA culture." Since there is no TA requirement for the MS degree, these students are generally here because they are personally interested in teaching.
 * **PhD Students (approx. 45%):** The department requires all PhD students to complete at least one quarter of TA-ship by the end of their third year. Since CS 501 is a prerequisite for that requirement, this group is taking the course as a mandatory part of their degree progress.
@@ -135,11 +135,11 @@ A key choice I made when designing these lessons was to incorporate **modeling**
 #### Modeling backward design and learning outcomes
 
 I made sure to start every class meeting by discussing the learning outcomes (LOs) of the day. In fact, in one of the classes, I started with a conventional agenda slide that merely listed the topics to be covered.
-![Agenda Slide](https://i.imgur.com/8qjPMEn.png)
+{{< slide-img src="/images/cs501-agenda.png" alt="Agenda slide listing 'Review: Learning Objectives' and 'Active Learning', followed by a prompt: from this agenda, is it clear to you as a student what you're expected to be able to do or understand after today's class? Why or why not?" >}}
 
 I then immediately contrasted that with a slide showing measurable LOs that focus on student learning. This highlighted how the latter can be much clearer signposts to guide student attention and prepare them mentally for what is to come.
 
-![Learning Outcomes Slide](https://i.imgur.com/HE93fFU.png)
+{{< slide-img src="/images/cs501-objectives.png" alt="Slide with 'Agenda' crossed out and replaced by 'Objectives!', listing measurable outcomes: explain levels of cognitive engagement according to Bloom's taxonomy in terms of action verbs, and design learning objectives that are measurable and achievable with the help of Bloom's taxonomy" >}}
 
 #### Modeling active learning
 
@@ -204,7 +204,7 @@ Although not an official goal of CS 501, I thought building a community for trai
 
 To this end, I incorporated a few simple things into the course. For example, I dedicated time in the first class meeting for everyone to introduce themselves with a fun memory game activity:
 
-![Memory Game Activity](https://i.imgur.com/Pf5vaF8.png)
+{{< slide-img src="/images/cs501-memory-game.png" alt="Ice-breaker slide: we'll go around the room; when it's your turn, share your name, year and program, where you're from, and a hobby you enjoy, then repeat the hobby of the person one turn earlier" >}}
 
 I also set up a CS 501 Discord server for non-FERPA course communications to keep things informal. Finally, I tried to encourage connections through regular group activities, teaching observations, and peer feedback sessions.
 

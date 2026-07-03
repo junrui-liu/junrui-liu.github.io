@@ -50,8 +50,7 @@ I delayed the start of the workshop by 2 minutes to allow the last couple of par
 ## Segment 2 - Introductions
 I first asked the participants to choose from one of the eight animals they would like to be reborn as, without explaining the reason behind this question[^2]. The choice would later be used to divide the participants into groups for discussion. I learned this trick from [Olga Faccani](https://www.classics.ucsb.edu/student/olga-faccani/) and [Lisa Berry](https://citral.ucsb.edu/people/lisa-berry), and found it an effective way to both signal to the participants that the vibe of the event is informal (depending on the prompt), and to act as a “Chekhov’s gun” device that gets the participants hooked since they know something will happen but they don’t know what will happen.
 
-![](https://imgur.com/k38qc0f.png)
-<!-- <img src="/2025-09-25-tao/animals.png" alt="animals" style="width:720px;"/> -->
+{{< slide-img src="/images/tao25-animals.png" alt="Slide asking: if you could be reborn as one of these animals, which would you choose? Eight photos follow: axolotl, hedgehog, capybara, guinea pig, chinchilla, owl, otter, and ferret" >}}
 
 [^2]: In retrospect, I definitely should have reframed the prompt as “which animal would you like to take care of as a pet (assuming it’s legal and humane to do so)”. Across both workshops, owl was the overwhelmingly popular choice, because it was “the apex predator that eats all of the other animals,” to quote one of the participants. I was completely blindsided by this response, as I expected them to choose simply based on how cute they thought each animal was. Alas, we STEM people are sometimes too rational. (Coincidentally, there were several Spanish native speakers in the room, who joyfully corrected my terrible pronunciation of axolotl.)
 
@@ -81,8 +80,7 @@ Of course, I didn’t get a chance to try out this method, but here are the resu
 ### Department representation
 Here’s a pie chart of represented departments across two workshops (I definitely have missed a few departments/schools that I’m ignorant of). The two workshops had roughly the same distribution:
 
-![](https://i.imgur.com/gvsZmNT.png)
-<!-- <img src="/2025-09-25-tao/dept.png" alt="dept" style="width:720px;"/> -->
+{{< themed-img light="/images/tao25-departments-light.png" dark="/images/tao25-departments-dark.png" alt="Pie chart of participants' departments: ECE 34.8%, CS 21.7%, PSTAT 8.7%, Geography 8.7%, Chem 6.5%, plus smaller slices for Media, Phys, and Math" >}}
 
 So the top-5 most represented departments are:
 1. Electrical and Computer Engineering: 34.8%
@@ -131,8 +129,7 @@ This is the fun part—7 participants voted this as the one thing they learned�
 
 However, I felt while preparing the workshop that something was ostensibly missing, the elephant in the room—AI use in the classroom. So before dividing the class into separate group discussions, I had the whole group pause and think about the following scenario:
 
-![](https://i.imgur.com/1gLHwXc.png)
-<!-- <img src="/2025-09-25-tao/ai.png" alt="ai" style="width:720px;"/> -->
+{{< slide-img src="/images/tao25-ai-scenario.png" alt="Warm-up scenario slide: when you walk around the classroom, you notice that a student is copying lab instructions, pasting them into ChatGPT one by one, and asking ChatGPT to solve the lab for them. What would you do?" >}}
 
 After I read the scenario to the participants, I heard some awkward laughs and saw some nods. One of the participants said that they had run into a similar situation with students before. I said I did too—it was during one of my office hours and the student was clearly doing it for “fun” (seeing whether ChatGPT could even solve the problem at all). But I felt something like this, or something perhaps worse, would be bound to happen at some point during the participants’ TA career, now that [“everyone is cheating their way through college”](https://nymag.com/intelligencer/article/openai-chatgpt-ai-cheating-education-college-students-school.html).
 
@@ -167,8 +164,7 @@ So if we assign a score of 1 to “Not useful” and 4 to “Very useful,” the
 - Don’t touch students’ keyboard: 3
 - Grading: 1
 
-![](https://i.imgur.com/oWEQ75p.png)
-<!-- <img src="/2025-09-25-tao/takeaway.png" alt="takeaway" style="width:720px;"/> -->
+{{< themed-img light="/images/tao25-takeaways-light.png" dark="/images/tao25-takeaways-dark.png" alt="Pie chart of workshop takeaways: how to handle AI uses 23.8%, how to field student questions 21.4%, group scenarios 16.7%, logistics and tech 14.3%, with smaller slices for communication, lab format, keyboard, and grading" >}}
 
 ### Constructive Feedback
 - More time/less materials/less time spent on introductions: 12

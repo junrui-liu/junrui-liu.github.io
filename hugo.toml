@@ -60,7 +60,11 @@ dateFormat = "Jan 2, 2006"
 # https://gohugo.io/configuration/markup/#highlight
 [markup]
 [markup.highlight]
-style = 'friendly'
+# Class-based highlighting so light/dark styles can be swapped in CSS;
+# the palettes are generated into partials/style.html:
+#   hugo gen chromastyles --style=friendly   (light)
+#   hugo gen chromastyles --style=gruvbox    (dark)
+noClasses = false
 lineNos = true
 lineNumbersInTable = false
 codeFences = true
