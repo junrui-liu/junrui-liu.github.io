@@ -12,7 +12,7 @@ Composing music is hard: if you hit the keys on a piano randomly, chances are, i
 
 To illustrate this view, here's a toy project called [Choco](https://github.com/junrui-liu/choco) that I built for composing music in the style of [Baroque four-part chorales](https://en.wikipedia.org/wiki/Four-part_harmony). It was originally developed as a course project for [CS 292C - Computer Aided Reasoning for Software](https://github.com/fredfeng/CS292C/tree/spring-2022), and was motivated by my earlier memory of doing four-part voice leading in a music theory class. I felt at that time that the rules of four-part harmony were rigid enough, and the process mechanical enough, that it would be possible to automate the process of composing a chorale. Choco is my attempt at doing just that.
 
-The tool is written in [Rosette](https://emina.github.io/rosette/), a really cool solver-aided programming language [^1] that I've also been using for [my (more serious) research](https://dl.acm.org/doi/10.1145/3503222.3507751).[^2] Note that the idea of algorithmic composition using symbolic reasoning is not new, dating back to at least 1988 with the [CHORAL project](http://www.global-supercomputing.com/people/kemal.ebcioglu/pdf/Ebcioglu-JLP90.pdf) by Ebcioglu. This toy project showcases how Rosette greatly simplifies the implementation of such a system: we just need to design a simple representation of chorales and write down the rules of four-part harmony as logical predicates in Racket. Rosette then takes a chorale sketch and automatically compiles it into constraints that can be easily solved by an SMT solver. In particular, there is no need to hand-roll a backtracking search algorithm ourselves, and Rosette does not need to have any understanding of music theory to synthesize a chorale.
+The tool is written in [Rosette](https://emina.github.io/rosette/), a really cool solver-aided programming language [^1] that I've also been using for [my (more serious) research](https://dl.acm.org/doi/10.1145/3503222.3507751).[^2] Note that the idea of algorithmic composition using symbolic reasoning is not new, dating back to at least 1988 with [Ebcioglu's CHORAL project](http://www.global-supercomputing.com/people/kemal.ebcioglu/pdf/Ebcioglu-JLP90.pdf). This toy project showcases how Rosette greatly simplifies the implementation of such a system: we just need to design a simple representation of chorales and write down the rules of four-part harmony as logical predicates in Racket. Rosette then takes a chorale sketch and automatically compiles it into constraints that can be easily solved by an SMT solver. In particular, there is no need to hand-roll a backtracking search algorithm ourselves, and Rosette does not need to have any understanding of music theory to be able to compose music.
 
 ## Background
 
@@ -24,7 +24,9 @@ A chorale typically consists of four independent *voices*. Each voice is a seque
 
 ### 1. The user provides a chorale sketch
 
-A sketch is a partial chorale that may contain *symbolic notes* and *symbolic chords* — holes to be filled in by the solver. In the sketch below, the top voice (the melody) is concrete, while all remaining voices are symbolic; the progression's first and last chords are specified in Roman numerals (I and V), while all chords in between are undetermined:
+A sketch is a partial chorale that contains a combination of *concrete* notes and chords, and *symbolic* notes and chords. The concrete elements are what the user already has in mind, while the symbolic elements are holes yet to be filled in to make the composition complete. 
+
+In the sketch below, the user specifies a concrete top voice (the melody they want), while all remaining voices are symbolic. The user also fixes progression's first and last chords using Roman numerals (I and V), while all chords in between are yet-to-be-determined:
 
 ![A chorale sketch: a concrete melody on the top staff, empty lower voices, and a progression reading I, six question marks, V](/images/choco-sketch.png)
 
@@ -32,8 +34,8 @@ A sketch is a partial chorale that may contain *symbolic notes* and *symbolic ch
 
 Choco encodes the syntactic rules of classical harmony as logical predicates over the sketch. For instance:
 
-- **Harmony**: every voice must be in harmony with the current chord — each note must match some pitch class of the chord.
-- **No voice crossing**: voices cannot "cross" each other between adjacent time steps — if one voice sits above another now, it must remain above at the next step.
+- (Harmony) Every voice must be in harmony with the current chord: each note must match some [pitch class](https://en.wikipedia.org/wiki/Pitch_class) of the chord.
+- (No voice crossing) Voices cannot "cross" each other between adjacent time steps: if one voice sits above another now, it must remain above at the next step.
 
 ![The two rules as logical predicates: the harmony rule, ∀n ∈ V. ∃pc ∈ C. n ≡ pc, marked with a green check; the voice-crossing rule, ∀n, m ∈ Vₜ × Vₜ₊₁. V(n) < V(m) ⟹ n < m, marked with a red cross](/images/choco-rules.png)
 
@@ -54,9 +56,9 @@ Given the sketch above (a concrete melody bookended by I and V), Choco fleshes i
 
 Naively throwing the constraints at the solver does not scale, so Choco employs a few tricks:
 
-1. **Tabulation**: expensive symbolic computations are pre-computed and looked up from a table instead of being re-derived symbolically.
-2. **Modular synthesis**: the problem is decomposed both *horizontally* (temporally, across time steps) and *vertically* (chordally, across voices), with backtracking to recover when a locally-chosen fragment cannot be extended.
-3. **Constraint transformation**: constraints are rewritten to avoid expensive modular-arithmetic operations, which SMT solvers handle poorly.
+1. Expensive symbolic computations are pre-computed and looked up from a table instead of being re-derived symbolically.
+2. The problem is decomposed both *horizontally* (temporally, across time steps) and *vertically* (chordally, across voices), with backtracking to recover when a locally-chosen fragment cannot be extended.
+3. Constraints are rewritten to avoid expensive modular-arithmetic operations, which SMT solvers handle poorly.
 
 ## Future work
 
