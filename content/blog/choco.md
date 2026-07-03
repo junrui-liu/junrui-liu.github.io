@@ -12,7 +12,7 @@ Composing music is hard: if you hit the keys on a piano randomly, chances are, i
 
 To illustrate this view, here's a toy project called [Choco](https://github.com/junrui-liu/choco) that I built for composing music in the style of [Baroque four-part chorales](https://en.wikipedia.org/wiki/Four-part_harmony). It was originally developed as a course project for [CS 292C - Computer Aided Reasoning for Software](https://github.com/fredfeng/CS292C/tree/spring-2022), and was motivated by my earlier memory of doing four-part voice leading in a music theory class. I felt at that time that the rules of four-part harmony were rigid enough, and the process mechanical enough, that it would be possible to automate the process of composing a chorale. Choco is my attempt at doing just that.
 
-The tool is written in [Rosette](https://emina.github.io/rosette/), a really cool solver-aided programming language [^1] that I've also been using for [my (more serious) research](https://dl.acm.org/doi/10.1145/3503222.3507751).[^2]
+The tool is written in [Rosette](https://emina.github.io/rosette/), a really cool solver-aided programming language [^1] that I've also been using for [my (more serious) research](https://dl.acm.org/doi/10.1145/3503222.3507751).[^2] Note that the idea of algorithmic composition using symbolic reasoning is not new, dating back to at least 1988 with the [CHORAL project](http://www.global-supercomputing.com/people/kemal.ebcioglu/pdf/Ebcioglu-JLP90.pdf) by Ebcioglu. This toy project showcases how Rosette greatly simplifies the implementation of such a system: we just need to design a simple representation of chorales and write down the rules of four-part harmony as logical predicates in Racket. Rosette then takes a chorale sketch and automatically compiles it into constraints that can be easily solved by an SMT solver. In particular, there is no need to hand-roll a backtracking search algorithm ourselves, and Rosette does not need to have any understanding of music theory to synthesize a chorale.
 
 ## Background
 
@@ -39,14 +39,14 @@ Choco encodes the syntactic rules of classical harmony as logical predicates ove
 
 ### 3. Angelic execution fills the sketch
 
-Finally, we ask the solver to fill the holes in a way that satisfies all of the syntax rules simultaneously. In Rosette, this is just a couple of lines:
+Finally, we ask the solver to fill the holes in a way that satisfies all of the syntax rules simultaneously. In Rosette, this is just two lines of code:
 
 ```racket
 (define model (solve (assert cs)))
 (evaluate sketch model)
 ```
 
-Given the sketch above (a concrete melody bookended by I and V), Choco produces a complete four-voice chorale:
+Given the sketch above (a concrete melody bookended by I and V), Choco fleshes it out into a complete four-voice chorale:
 
 ![The completed chorale: all four voices filled in, with the progression I, V⁷/iv, iv⁶₄, V⁶₄, V⁶₅/ii, ii, I, V](/images/choco-result.png)
 
@@ -60,8 +60,8 @@ Naively throwing the constraints at the solver does not scale, so Choco employs 
 
 ## Future work
 
-1. Design a DSL for specifying the syntax of different music genres and theories, so the framework isn't hard-wired to Baroque harmony.
-2. Frame composition as an *optimal* synthesis problem, to account for soft syntactic constraints — rules that good compositions prefer to follow but may occasionally break.
+1. Mere syntactical correctness does not imply the music should sound good. In fact, the completed chorale shown above is quite janky-sounding. We might want to frame composition as an *optimal* synthesis problem, to account for soft syntactic constraints (rules that good compositions prefer to follow but may occasionally break), or to bias the search towards more "musical" solutions. 
+2. Design a DSL for specifying the syntax of different music genres and theories, so the framework isn't hard-wired to Baroque harmony.
 3. Extend the framework to incorporate metric theory and transformational theory.
 
 ## References
