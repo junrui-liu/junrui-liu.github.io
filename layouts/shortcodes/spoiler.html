@@ -1,0 +1,4 @@
+{{- /* Wrap text that stays hidden (blurred) until the reader hovers or focuses
+  the note it lives in. See the .spoiler rules in partials/style.html. Inner
+  markdown is rendered inline so links and emphasis work. */ -}}
+<span class="spoiler">{{ .Inner | .Page.RenderString (dict "display" "inline") }}</span>

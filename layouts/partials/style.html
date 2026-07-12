@@ -8,7 +8,7 @@
       Cambria, Georgia, serif;
     --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui,
       Roboto, 'Helvetica Neue', Arial, sans-serif;
-    --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Monaco, Consolas,
+    --font-mono: 'Fira Code', ui-monospace, 'SF Mono', Menlo, Monaco, Consolas,
       'Liberation Mono', monospace;
 
     --font-scale: 18px;
@@ -357,16 +357,145 @@
   }
 
   /* Slide/screenshot images with opaque backgrounds: frame them as cards
-     so they read as intentional on both paper and dark backgrounds. */
+     so they read as intentional on both paper and dark backgrounds.
+     An optional `width` on the shortcode feeds --img-width. */
   .slide-img {
     border: 1px solid var(--border-color);
     border-radius: 6px;
+    width: var(--img-width, auto);
+    max-width: 100%;
   }
 
   @media (prefers-color-scheme: dark) {
     .slide-img {
       filter: brightness(0.87);
     }
+  }
+
+  /* Juxtapose several slide images (with optional text between) in one row.
+     Images share the row equally (flex-basis 0) and shrink to fit, capped at
+     their own --img-width, so all of them stay on a single line. */
+  .slide-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    margin: 1.5rem 0;
+  }
+
+  .slide-row .slide-img {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+    max-width: var(--img-width, 100%);
+  }
+
+  /* ----- Minecraft game diagrams (mc-game / mc-state / mc-arrow shortcodes) ----- */
+  /* A diagram is a horizontal run of states and arrows. Whitespace between the
+     nested shortcodes collapses because flex items ignore inter-item whitespace. */
+  .mc-game {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem 0.9rem;
+    margin: 1.7rem 0;
+    font-family: var(--font-ui);
+  }
+
+  /* One state: inventory stack, a double-line divider, then the goal. */
+  .mc-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .mc-inv,
+  .mc-goal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+  }
+
+  /* Item = icon in a slot + a name caption underneath. */
+  .mc-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+
+  .mc-slot {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 46px;
+    box-sizing: border-box;
+    padding: 6px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    /* Faint inventory-slot fill that reads on both paper and dark backgrounds. */
+    background: color-mix(in srgb, var(--muted-color) 10%, transparent);
+  }
+
+  .mc-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Keep the pixel art crisp when scaled up from 16-/32-px sources. */
+    image-rendering: pixelated;
+    border-radius: 0;
+  }
+
+  /* Generic placeholder items (A, B, C …) render as a lettered tile. */
+  .mc-slot-generic {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--heading-color);
+    background: var(--surface-color);
+  }
+
+  .mc-item-label {
+    font-size: 0.74rem;
+    line-height: 1;
+    color: var(--muted-color);
+  }
+
+  /* The "====" separating inventory from goal: a themed double rule. */
+  .mc-divider {
+    width: 46px;
+    height: 4px;
+    border-top: 2px solid var(--muted-color);
+    border-bottom: 2px solid var(--muted-color);
+  }
+
+  /* Transition arrow with an action label above the glyph. */
+  .mc-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1px;
+    align-self: center;
+    color: var(--muted-color);
+  }
+
+  .mc-arrow-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--link-color);
+    padding: 1px 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    background: var(--surface-color);
+    white-space: nowrap;
+  }
+
+  .mc-arrow-glyph {
+    font-size: 1.5rem;
+    line-height: 1;
   }
 
   /* ----- Code ----- */
@@ -891,8 +1020,10 @@
   .post-toc {
     position: fixed;
     top: 6rem;
-    left: calc(50vw + var(--width) / 2 + 2rem);
-    width: 220px;
+    /* Left gutter, hugging the reading column; the right gutter is now
+       reserved for Tufte-style sidenotes. */
+    left: max(1.5rem, calc(50vw - var(--width) / 2 - 2rem - 170px));
+    width: 170px;
     max-height: calc(100vh - 8rem);
     overflow-y: auto;
     font-family: var(--font-ui);
@@ -958,9 +1089,148 @@
     background: none;
   }
 
-  @media (max-width: 1199px) {
+  /* ----- Footnotes → Tufte sidenotes ----- */
+  /* Inline reference marker in the body text. */
+  .footnote-ref a {
+    text-decoration: none;
+    color: var(--link-color);
+    font-weight: 500;
+    padding: 0 0.1em;
+  }
+
+  /* Bottom footnote list: shown on narrow screens and when JS is off. */
+  .footnotes {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.92em;
+    color: var(--muted-color);
+  }
+
+  .footnotes hr {
+    display: none;
+  }
+
+  .footnotes ol {
+    padding-left: 1.2em;
+  }
+
+  .footnote-backref {
+    text-decoration: none;
+    margin-left: 0.3em;
+  }
+
+  /* Sidenote injected by JS next to its reference. Hidden until there is
+     room for a right gutter (see the min-width rule below). */
+  .sidenote {
+    display: none;
+    font-family: var(--font-body);
+    font-size: 0.85em;
+    line-height: 1.5;
+    color: var(--muted-color);
+    text-align: left;
+  }
+
+  .sidenote p {
+    margin: 0 0 0.5em;
+  }
+
+  .sidenote p:last-child {
+    margin-bottom: 0;
+  }
+
+  .sidenote-number {
+    color: var(--link-color);
+    font-weight: 600;
+    margin-right: 0.15em;
+  }
+
+  /* Spoiler markup (the "spoiler" shortcode emits span.spoiler): blur the
+     marked text until the reader hovers or focuses the note it lives in.
+     Mirrors the hover-to-reveal treatment on the email address. Any surrounding
+     text (e.g. a "Spoiler:" label) stays sharp as a teaser. */
+  .spoiler {
+    filter: blur(4.5px);
+    transition: filter 0.25s ease;
+  }
+
+  .sidenote:has(.spoiler),
+  .footnotes li:has(.spoiler) {
+    cursor: help;
+    outline: none;
+  }
+
+  .sidenote:hover .spoiler,
+  .sidenote:focus-within .spoiler,
+  .footnotes li:hover .spoiler,
+  .footnotes li:focus-within .spoiler {
+    filter: blur(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spoiler {
+      transition: none;
+    }
+  }
+
+  @media (min-width: 1140px) {
+    /* Tufte layout: narrow the reading measure so the freed space on the
+       right becomes a proper margin for wide sidenotes. Text stays flush
+       left (aligned with the header), notes live to its right. */
+    .tufte-body {
+      max-width: 600px;
+    }
+
+    /* Float each note into the margin. The negative right margin lets the
+       box sit outside the (now narrow) text column without reflowing text. */
+    .sidenote {
+      display: block;
+      float: right;
+      clear: right;
+      width: 240px;
+      margin: 0.2rem -264px 1.2rem 0;
+    }
+
+    /* Notes now live in the margin, so hide the bottom pile. */
+    .footnotes {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1139px) {
     .post-toc {
       display: none;
     }
+  }
+
+  /* ---------- Minecraft-logic prose helpers ---------- */
+  /* An action name as a pill, matching the arrow labels inside <mc-derivation>. */
+  .mcg-act {
+    display: inline-block;
+    padding: 0.04em 0.6em;
+    border: 1.5px solid var(--link-color);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.82em;
+    font-weight: 600;
+    line-height: 1.45;
+    color: var(--link-color);
+    white-space: nowrap;
+  }
+  /* An item name annotated with its pixel icon (used in the item/action lists). */
+  .mcg-inline-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    white-space: nowrap;
+  }
+  .mcg-inline-icon {
+    width: 1.25em;
+    height: 1.25em;
+    object-fit: contain;
+    image-rendering: pixelated;
+    vertical-align: middle;
   }
 </style>

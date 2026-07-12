@@ -1,0 +1,20 @@
+{{- /* Render a single game item as a labeled inventory slot.
+  Context: dict with
+    "name" — the item name the author typed (e.g. "wood", "axe", or a generic "A")
+    "map"  — dict mapping known item names to {src, label}
+  Known items render their Minecraft icon; anything else (generic placeholders
+  like A, B, C) renders as a lettered tile. See the .mc-* rules in
+  partials/style.html. */ -}}
+{{- $name := .name -}}
+{{- $map := .map -}}
+{{- with index $map $name -}}
+  <span class="mc-item">
+    <span class="mc-slot"><img src="{{ .src }}" alt="{{ .label }}" loading="lazy"></span>
+    <span class="mc-item-label">{{ .label }}</span>
+  </span>
+{{- else -}}
+  <span class="mc-item">
+    <span class="mc-slot mc-slot-generic">{{ $name }}</span>
+    <span class="mc-item-label">&nbsp;</span>
+  </span>
+{{- end -}}

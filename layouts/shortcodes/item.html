@@ -1,0 +1,4 @@
+{{- /* An item name annotated with its Minecraft icon (inline). */ -}}
+{{- $name := .Get 0 -}}
+{{- $base := .Get 1 | default "/images/minecraft" -}}
+<span class="mcg-inline-item"><img class="mcg-inline-icon" src="{{ $base }}/{{ $name }}.png" alt="{{ $name }}" loading="lazy">{{ $name }}</span>

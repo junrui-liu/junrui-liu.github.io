@@ -1,4 +1,5 @@
 {{ define "main" }}
+<div class="{{ if eq .Type "blog" }}tufte-body{{ end }}">
 {{ if eq .Type "blog" }}{{ if not .Params.menu }}
 <h1 id="top">{{ .Title }}</h1>
 <p>
@@ -41,8 +42,58 @@
 {{- partial "post_navigator.html" . -}}
 {{ end }}
 {{ end }}
+</div>
 
 <script>
+    // Reposition Hugo/Goldmark footnotes into Tufte-style margin sidenotes.
+    // The markdown stays plain [^n] footnotes; we clone the rendered note
+    // content next to each reference and let CSS float it into the gutter
+    // (wide screens) or fall back to the bottom footnote list (narrow).
+    (function () {
+        const article = document.querySelector('.post-content');
+        if (!article) return;
+
+        // Author-marked spoilers: any <span class="spoiler"> in a note is blurred
+        // by CSS until the note is hovered or focused. Mouse hover works via CSS
+        // alone; this just makes a spoiler-bearing note keyboard/touch focusable
+        // so the reveal isn't mouse-only.
+        const markSpoiler = (container) => {
+            if (container.querySelector('.spoiler')) {
+                container.setAttribute('tabindex', '0');
+            }
+        };
+
+        const refs = article.querySelectorAll('a.footnote-ref[href^="#fn:"]');
+        refs.forEach((a) => {
+            const li = document.getElementById(a.getAttribute('href').slice(1));
+            const sup = a.closest('sup');
+            if (!li || !sup) return;
+
+            const clone = li.cloneNode(true);
+            clone.querySelectorAll('.footnote-backref').forEach((b) => b.remove());
+
+            const aside = document.createElement('aside');
+            aside.className = 'sidenote';
+            aside.setAttribute('role', 'note');
+
+            const marker = document.createElement('sup');
+            marker.className = 'sidenote-number';
+            marker.textContent = a.textContent.trim();
+
+            const firstBlock = clone.querySelector('p') || clone;
+            firstBlock.insertBefore(document.createTextNode(' '), firstBlock.firstChild);
+            firstBlock.insertBefore(marker, firstBlock.firstChild);
+
+            while (clone.firstChild) aside.appendChild(clone.firstChild);
+            sup.parentNode.insertBefore(aside, sup.nextSibling);
+
+            // Make spoiler-bearing notes focusable (margin sidenote + the
+            // bottom-list fallback shown on narrow screens).
+            markSpoiler(aside);
+            markSpoiler(li);
+        });
+    })();
+
     (function () {
         const toc = document.querySelector('.post-toc');
         if (!toc) return;

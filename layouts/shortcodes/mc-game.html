@@ -1,0 +1,12 @@
+{{- /* Container for a game state-transition diagram built from Minecraft item
+  icons. Wrap {{< mc-state >}} and {{< mc-arrow >}} calls:
+
+      {{< mc-game aria="Chopping wood turns it into a stick" >}}
+      {{< mc-state inv="wood, ore" goal="axe" >}}
+      {{< mc-arrow label="chop" >}}
+      {{< mc-state inv="stick, ore" goal="axe" >}}
+      {{< /mc-game >}}
+
+  aria — a plain-language description of the whole diagram (optional but
+         recommended for screen readers). See .mc-* rules in partials/style.html. */ -}}
+<span class="mc-game"{{ with .Get "aria" }} role="figure" aria-label="{{ . }}"{{ end }}>{{ .Inner }}</span>

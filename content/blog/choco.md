@@ -3,7 +3,7 @@ title = "Solver-aided chorale composition"
 date = "2022-06-11"
 slug = "choco"
 tags = [
-    "music",
+    "music", "logic"
 ]
 +++
 

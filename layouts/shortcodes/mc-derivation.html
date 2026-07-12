@@ -1,0 +1,22 @@
+{{- /* Interactive derivation (the <mc-derivation> web component): one element for
+  both linear and branching proofs. The inner content is the JSON spec (see
+  mc-logic/README.md): an `engine` spec (`have`/`show`/`script`) validated by the
+  kernel, or a hand-authored `diagram`. Loads the module bundle once per page.
+  Example:
+
+    {{< mc-derivation step="0" >}}
+    { "engine": { "have": ["wood", "ore"], "show": "axe",
+                  "script": { "rule": "assemble", "dir": "bwd" } } }
+    {{< /mc-derivation >}}
+
+  Optional params: step (initial number of actions applied; default all),
+  captions ("off" to hide labels). */ -}}
+{{- $spec := trim .Inner "\n\r \t" -}}
+<mc-derivation icon-base="{{ "images/minecraft" | relURL }}"{{ with .Get "step" }} step="{{ . }}"{{ end }}{{ with .Get "captions" }} captions="{{ . }}"{{ end }}>
+  {{ printf `<script type="application/json">%s</script>` $spec | safeHTML }}
+  <p class="mcg-fallback"><em>Interactive derivation — enable JavaScript to step through it.</em></p>
+</mc-derivation>
+{{- if not (.Page.Store.Get "mcLoaded") -}}
+<script type="module" src="{{ "js/mc-derivation.js" | relURL }}"></script>
+{{- .Page.Store.Set "mcLoaded" true -}}
+{{- end -}}

@@ -1,0 +1,35 @@
+{{- /* One game state: an inventory of items above a double-line divider, with a
+  single goal item below it. Mirrors the ASCII
+
+      wood
+      ore
+      ====
+      axe
+
+  Usage: {{< mc-state inv="wood, ore" goal="axe" >}}
+    inv  — comma-separated item names (order = top to bottom)
+    goal — the goal item below the divider (optional)
+  Item names are looked up in $map below; unknown names render as generic
+  lettered tiles (for placeholders like A, B, C). Nest inside {{< mc-game >}}. */ -}}
+{{- $map := dict
+  "wood"     (dict "src" "/images/minecraft/wood.png"     "label" "wood")
+  "ore"      (dict "src" "/images/minecraft/ore.png"      "label" "ore")
+  "stick"    (dict "src" "/images/minecraft/stick.png"    "label" "stick")
+  "iron"     (dict "src" "/images/minecraft/iron.png"     "label" "iron")
+  "charcoal" (dict "src" "/images/minecraft/charcoal.png" "label" "charcoal")
+  "axe"      (dict "src" "/images/minecraft/axe.png"      "label" "axe")
+-}}
+{{- $inv := slice -}}
+{{- with .Get "inv" -}}{{ $inv = split . "," }}{{- end -}}
+<span class="mc-state">
+  <span class="mc-inv">
+    {{- range $inv -}}
+      {{- $n := trim . " " -}}
+      {{- if $n }}{{ partial "mc-item.html" (dict "name" $n "map" $map) }}{{ end -}}
+    {{- end -}}
+  </span>
+  <span class="mc-divider" aria-hidden="true"></span>
+  <span class="mc-goal">
+    {{- with .Get "goal" }}{{ partial "mc-item.html" (dict "name" (trim . " ") "map" $map) }}{{ end -}}
+  </span>
+</span>

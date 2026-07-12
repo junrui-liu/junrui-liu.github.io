@@ -1,0 +1,13 @@
+{{- /* A labeled transition arrow between two game states. Mirrors the ASCII
+  -[chop]->. Usage: {{< mc-arrow label="chop" >}} or, for backward reasoning,
+  {{< mc-arrow label="assemble" dir="left" >}}
+    label — the action name shown on the arrow (optional)
+    dir   — "right" (default) or "left"
+  Nest inside {{< mc-game >}}, between two {{< mc-state >}} calls. */ -}}
+{{- $dir := .Get "dir" | default "right" -}}
+{{- $glyph := cond (eq $dir "left") "⟵" "⟶" -}}
+{{- $label := .Get "label" -}}
+<span class="mc-arrow" role="img" aria-label="{{ with $label }}apply action {{ . }}{{ else }}then{{ end }}{{ if eq $dir "left" }}, backward{{ end }}">
+  {{- with $label }}<span class="mc-arrow-label">{{ . }}</span>{{ end -}}
+  <span class="mc-arrow-glyph" aria-hidden="true">{{ $glyph }}</span>
+</span>
