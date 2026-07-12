@@ -1,13 +1,13 @@
 +++
 title = "Logic as Minecraft (Part 1)"
-date = "2026-07-07"
+date = "2026-07-12"
 slug = "mc-logic-1"
 tags = [
     "logic"
 ]
 +++
 
-
+## Introduction
 
 This blog post is intended to be the first in a series where I try out an alternative approach to teaching formal logic and proofs, using a crafting/resource management game as a vehicle. I will be taking liberal inspiration and examples from the wonderful [Minecraft](https://en.wikipedia.org/wiki/Minecraft) video game, a game that I enjoy [^mc].
 
