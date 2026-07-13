@@ -97,10 +97,10 @@ I hope that even if you haven't played Minecraft before, you can intuitively und
 
 [^mc-history]: After all, Minecraft is a pretty good simulation of how our ancestors lived in the Middle Ages (at least before you get into the redstone stuff)!
 
-To familiarize ourselves with the game, let's play a few rounds, shall we? Let's say the initial state of our game is as follows:
+To familiarize ourselves with the game, let's play a few rounds, shall we? Say the initial state of our game is as follows:
 
-{{< mc-derivation >}}
-{ "diagram": { "inv": ["wood","ore"], "goal": "axe" } }
+{{< mc-derivation step="0" >}}
+{ "engine": { "have": ["wood", "ore"], "show": "axe", "script": null } }
 {{< /mc-derivation >}}
 
 <!-- Original ASCII (kept for reference):
@@ -111,7 +111,7 @@ ore
 axe
 ```
 -->
-That is, let's say we already have a piece of wood and a piece of ore in our inventory, and our goal is to make an axe.
+That is, we already have a piece of `wood` and a piece of `ore` in our inventory, and our goal is to make an `axe`, which is marked with an {{< leaf-tag "open" >}} tag since the goal item is not yet in our inventory.
 
 **Exercise**: Take a pause, and think about how you would play this game. What action would you take first?
 
@@ -136,9 +136,9 @@ Wait, we don't have any `wood` left in our inventory! We just used it to make a 
 
 As a kind game designer, I want to make our life a little easier: let's NOT worry about how many copies of each item we have in our inventory. Instead, I will introduce a "cheat-code" action called {{< act "dup" >}}, whose effect is captured by the following diagram:
 
-{{< mc-derivation >}}
-{ "diagram": { "inv": ["A","…"], "goal": "…", "rule": "dup", "dir": "fwd",
-  "children": [ { "inv": ["A","A","…"], "goal": "…" } ] } }
+{{< mc-derivation step="1" >}}
+{ "engine": { "have": ["A", "..."], "show": "G",
+  "script": { "rule": "dup", "hints": { "A": "A" } } } }
 {{< /mc-derivation >}}
 
 <!-- Original ASCII (kept for reference):
@@ -234,30 +234,55 @@ axe                  \ ?2
 -->
 You see, using backward reasoning, the diagram is no longer a linear sequence: the initial state is "forked" into two independent sub-states, one for each sub-goal. For each sub-goal, we will tackle them separately, which may further fork into more sub-goals, and so on. So our diagram will eventually grow into a tree. (Note that we also switch the direction of the arrow to indicate that we are applying the {{< act "assemble" >}} action right-to-left.)
 
+In the backward setting, a subtle yet important question arises: what should the inventories of the sub-states be (marked `?1` and `?2` in the diagram above)? In other words, when we fork the game state into two sub-states, how should we manage the inventory?
 
-With backward reasoning, a new and important question arises: what should the inventories of the sub-states be (marked `?1` and `?2` in the diagram above)? In other words, when we fork the game state into two sub-states, how should we manage the inventory? 
+Note that this question is a *game design question*, since it will affect all games that involve backward reasoning and hence potentially affect every player.
 
-This is a non-trivial and non-obvious question, one that perhaps only a game designer can answer, since deciding how inventory behaves under backward reasoning affects *all* actions applied backwards. Different design choices will lead to different gaming experiences for the player. Some might make the game harder, some might make it easier---hey, even the designer might not know for sure until tons of people have played through it!  This is what I think the real thrill of this series is: seeing how a seemingly innocent design choice can have far-reaching and emergent effects on the game and the player's experience.
+## Inventory management
 
-<!-- [^game-logic]: Spoiler: the game we're designing is actually a logical system. So the design choices we'll explore literally change the kind of logical reasoning that's allowed. -->
+I think the most natural approach that you might think of is to "split" the inventory into two disjoint parts, one for each sub-state. For example, we might allocate `wood` to the left sub-state and `ore` to the right sub-state, which would give us the following diagram:
 
-Let's experience this first-hand by exploring different designs of inventory management under backward reasoning.
+{{< mc-derivation >}}
+{ "diagram": { "inv": ["wood","ore"], "goal": "axe", "rule": "assemble", "dir": "bwd",
+  "children": [ { "inv": ["wood"], "goal": "stick" }, { "inv": ["ore"], "goal": "iron" } ] } }
+{{< /mc-derivation >}}
 
-## Designing inventory management
+Intuitive, this makes sense: the meaning of our initial state is that an `axe` must be made from items in the initial inventory; since `axe` can be made from `stick` and `iron`, some of the items in the initial inventory must be used to make `stick`, and the rest must be used to make `iron`. So it seems natural to split the inventory into two disjoint parts, one for each sub-state.
 
-**Open-ended exercise**: I encourage you to pause and think about what design(s) immediately occur to you, and then pretend to be a player and try to play the game under your design(s).
+Let's call this approach to inventory management the **split inventory** design. There is absolutely nothing wrong with this approach [^linear] --- it's just one of the many ways to design the game. That said, this approach makes the game more difficult to play, because we must correctly predict which items to allocate to each sub-state.
 
-Sadly, since a blog is a non-interactive medium, I can't explore your ideas with you together, and will have to read your mind and anticipate several reasonable designs you might propose (see if I guessed right!):
-1. **Clean split**: Whatever `?1` and `?2` are, their *union* should be the original inventory, but they should be *disjoint* -- that is, `?1` and `?2` should not have any items in common.
-     - For example, take `?1 = wood` and `?2 = ore`. Then they cleanly split the original inventory into two disjoint parts.
-2. **Overlapping split**: The union of `?1` and `?2` should be the original inventory, but they don't have to be disjoint.
-      - For example, take `?1 = wood` and `?2 = wood, ore`, so they share `wood` in common, an overlap forbidden by design 1 but allowed here. The union of `?1` and `?2` is still the original inventory. 
-3. **Total overlap**: Both `?1` and `?2` are *identical* to the original inventory. I.e., the diagram simply looks like this:
+To see this, let's look at the previous diagram. In fact, if we try to continue the game, we will quickly discover that the game is stuck for exactly the same reason as before: the lower branch needs another piece of `wood` to make `charcoal` for smelting `iron`, but the upper branch already used up the only piece of `wood` in the inventory to make a `stick`. Thus, we would have to backtrack, insert a {{< act "dup" >}} action to duplicate `wood`, and then have the foresight to allocate one piece of `wood` to the upper branch and the other piece of `wood` to the lower branch:
 
-   {{< mc-derivation >}}
-   { "diagram": { "inv": ["wood","ore"], "goal": "axe", "rule": "assemble", "dir": "bwd",
-     "children": [ { "inv": ["wood","ore"], "goal": "stick" }, { "inv": ["wood","ore"], "goal": "iron" } ] } }
-   {{< /mc-derivation >}}
+
+{{< mc-derivation >}}
+{ "diagram": { "inv": ["wood","ore"], "goal": "axe", "rule": "dup", "dir": "fwd",
+  "children": [ { "inv": ["wood","wood","ore"], "goal": "axe", "rule": "assemble", "dir": "bwd",
+    "children": [ { "inv": ["wood"], "goal": "stick" }, { "inv": ["wood","ore"], "goal": "iron" } ] } ] } }
+{{< /mc-derivation >}}
+
+<!-- Original ASCII (kept for reference):
+```                      
+                 wood                   wood     
+wood             wood                   =====
+ore              ore                  / stick
+======= -[dup]-> ====== <-[assemble]-
+axe              axe                  \ wood
+                                        ore
+                                        =====
+                                        iron
+```
+--->
+
+[^linear]: It turns out that there are actual logics that are based on this idea of splitting the inventory into disjoint parts, for example, [linear logics](https://en.wikipedia.org/wiki/Linear_logic).
+
+Correctly managing the inventory can get more challenging as our goal becomes more complex, where the game tree eventually grows very large and deep. In those cases, we need some serious foresight and advanced planning to make sure we're allocating the right items to the right sub-states. 
+
+Instead, to make our life easier, I argue that {{< act "dup" >}} actually allows us to *simplify* our inventory management approach: instead of carefully splitting the inventory into two disjoint parts, we are justified in allowing *each sub-state to inherit the same inventory as the original state*. For example, the following diagram illustrates another valid way to *design* the game, where both sub-states inherit `wood` and `ore`:
+   
+{{< mc-derivation step="1" >}}
+{ "engine": { "have": ["wood", "ore"], "show": "axe",
+  "script": { "rule": "assemble", "dir": "bwd", "children": [ ] } } }
+{{< /mc-derivation >}}
 
    <!-- Original ASCII (kept for reference):
    ```
@@ -271,172 +296,31 @@ Sadly, since a blog is a non-interactive medium, I can't explore your ideas with
                             =====
                             iron
    ```
-   -->
+   --->
 
+Let's call this alternative approach the **inherited inventory** design. 
 
-**Exercise**: Take a pause here. Which design makes more sense to you? Can you explain why in a sentence or two?
+I argue that this design also makes sense, because we could have easily
+1. inserted one {{< act "dup" >}} to every item in the original inventory, so that every item has two copies available before we fork, and
+2. allocated one copy to the upper branch and the other copy to the lower branch.
 
-*Hint*: there is no single "correct" answer. Which design lets you finish the game, and which design will get you stuck? If more than one design lets you finish the game, which one is more "efficient" in terms of the total number of actions you need to take? 
-
----
-
-Ok. Perhaps you have come up with your own answer and reasoning. If not, that's fine! At least you gave it some serious thought, which is what matters.
-
-Let's think through the three designs together. I claim that design 1 is probably the most "natural" choice at first glance. Here's a plausible explanation. Let's say our current state has items `A` through `E`, and the goal is to make `Z`, which comes from the action `X, Y -> Z` (or, if you read it backwards, `Z <- X, Y`):
-
-{{< mc-derivation >}}
-{ "diagram": { "inv": ["A","B","C","D","E"], "goal": "Z", "rule": "X, Y → Z", "dir": "bwd",
-  "children": [ { "inv": ["…"], "goal": "X" }, { "inv": ["…"], "goal": "Y" } ] } }
-{{< /mc-derivation >}}
-
-<!-- Original ASCII (kept for reference):
-```
-A
-B          ...
-C          ====
-D           X
-E        /
-==== <---
-Z        \
-           ...
-           ====
-            Y
-```
--->
-which means that however smart we are and whatever path the game takes, `X` must ultimately be made from `A` through `E`, right?
-
-Now, because we are reasoning backwards, we need to first use the same set of resources (`A`-`E`) to produce `X` and `Y`, independently. So our initial resources must be divided, some of which will be used to make `X`, and the rest of which will be used to make `Y`. The former items will be in the inventory for the upper branch, and the latter items will be in the inventory for the lower branch.
-
-Back to our original example:
-
-{{< mc-derivation >}}
-{ "diagram": { "inv": ["wood","ore"], "goal": "axe", "rule": "assemble", "dir": "bwd",
-  "children": [ { "inv": ["?1"], "goal": "stick" }, { "inv": ["?2"], "goal": "iron" } ] } }
-{{< /mc-derivation >}}
-
-It is therefore natural to require that `?1` and `?2` are disjoint, and their union is the original inventory: some of the original items go into `?1`, and the rest go into `?2`. This is design 1.
-
-Unfortunately, design 1 might sometimes get us stuck...
-
-**Exercise**: Take a pause. Why will we get stuck under design 1? You can use our previous game as an example:
-
-
-<!-- Original ASCII (kept for reference):
-```
-                       ?1
-wood                   =====
-ore                  / stick
-======= <-[assemble]-
-axe                  \ ?2
-                       =====
-                       iron
-```
--->
-
----
-
-Well, we run into the same problem as before: both `stick` and `iron` require `wood` to make.
-
-- If we allocate `wood` to `?1` for `stick`, then we won't have any `wood` left to make `iron`.
-- If we allocate `wood` to `?2` to make `iron`, then we won't have any `wood` left to make `stick`.
-In either case, we can't finish the game.
-
-So if we were to pick design 1, we would need to insert a {{< act "dup" >}} action to duplicate `wood` prior to {{< act "assemble" >}}:
+Another way to think about it is that the diagram under the inherited inventory design is just a collapsed version of the diagram under the split inventory design by hiding some of the {{< act "dup" >}} actions that we would have had to explicitly insert in the split inventory design. For example, we can think of the above diagram as a collapsed version of the following diagram, where we explicitly inserted {{< act "dup" >}} actions to duplicate `wood` and `ore` before forking the game state:
 
 {{< mc-derivation >}}
 { "diagram": { "inv": ["wood","ore"], "goal": "axe", "rule": "dup", "dir": "fwd",
-  "children": [ { "inv": ["wood","wood","ore"], "goal": "axe", "rule": "assemble", "dir": "bwd",
-    "children": [ { "inv": ["wood"], "goal": "stick" }, { "inv": ["wood","ore"], "goal": "iron" } ] } ] } }
+  "children": [ { "inv": ["wood","wood","ore"], "goal": "axe", "rule": "dup", "dir": "fwd",
+    "children": [ { "inv": ["wood","wood","ore","ore"], "goal": "axe", "rule": "assemble", "dir": "bwd",
+      "children": [ { "inv": ["wood","ore"], "goal": "stick" }, { "inv": ["wood","ore"], "goal": "iron" } ] } ] } ] } }
 {{< /mc-derivation >}}
 
-<!-- Original ASCII (kept for reference):
-```                      
-                 wood                   wood     
-wood             wood                   =====
-ore              ore                  / stick
-======= -[dup]-> ====== <-[assemble]-
-axe              axe                  \ wood
-                                        ore
-                                        =====
-                                        iron
-```
--->
-If we did this, then all is well.
+In some sense, the two designs are essentially equivalent in their expressive power: if a player can win the game under one design, then they can also win the game under the other design. 
 
-In fact, the presense of `dup` is exactly why design 2 is *also* a reasonable design choice!
+However, the inherited inventory design arguably makes the game easier to play and is more "forgiving", because it saves us from having to plan ahead and explicitly write out {{< act "dup" >}} actions. Instead, we just duplicate *every* item so that it becomes available to all sub-states for the rest of the game. If we happen to need that item down the road, then great; if we don't, then no harm done, since possessing unused resource doesn't invalidate our win condition.
 
-Recall that, thanks to {{< act "dup" >}}, having one copy of an item in our inventory is (spiritually) just as good as having infinitely many copies of that item. So we can justify copying the same item, say `wood`, into both `?1` and `?2` in the diagram, because we could have easily applied {{< act "dup" >}} before {{< act "assemble" >}} to duplicate `wood` like the diagram above shows. In other words, design 2 is no more powerful than design 1; it just saves us from having to explicitly write out {{< act "dup" >}} actions. 
+Therefore, we will assume the inherited inventory design for the rest of this blog series, as it makes the lifes of the players easier.
 
-Another way to think about design 2 is that, if we can finish a game under design 2, there's an equivalent way to finish the game under design 1: take the game tree for winning under design 2, and just insert a bunch of {{< act "dup" >}} actions at the right places (i.e., on the items that are implicitly duplicated in a backward-applied action).
 
-For example, the following diagram assumes design 2, where `wood` is implicitly duplicated into both `?1` and `?2`:
-
-{{< mc-derivation >}}
-{ "diagram": { "inv": ["wood","ore"], "goal": "axe", "rule": "assemble", "dir": "bwd",
-  "children": [ { "inv": ["wood"], "goal": "stick" }, { "inv": ["wood","ore"], "goal": "iron" } ] } }
-{{< /mc-derivation >}}
-
-<!-- Original ASCII (kept for reference):
-```
-                       wood
-wood                   =====
-ore                  / stick
-======= <-[assemble]-
-axe                  \ wood
-                       ore
-                       =====
-                       iron
-```
--->
-But we could have also explicitly written out the {{< act "dup" >}} action, which was exactly what we had to do under design 1:
-
-{{< mc-derivation >}}
-{ "diagram": { "inv": ["wood","ore"], "goal": "axe", "rule": "dup", "dir": "fwd",
-  "children": [ { "inv": ["wood","wood","ore"], "goal": "axe", "rule": "assemble", "dir": "bwd",
-    "children": [ { "inv": ["wood"], "goal": "stick" }, { "inv": ["wood","ore"], "goal": "iron" } ] } ] } }
-{{< /mc-derivation >}}
-
-<!-- Original ASCII (kept for reference):
-```                      
-                 wood                   wood     
-wood             wood                   =====
-ore              ore                  / stick
-======= -[dup]-> ====== <-[assemble]-
-axe              axe                  \ wood
-                                        ore
-                                        =====
-                                        iron
-```
--->
-So, design 2 = design 1 + some implicit {{< act "dup" >}}'s that we're too lazy to write out.
-
-If this makes sense to you, then I hope it would not be too difficult to generalize design 2 to design 3: instead of implicitly duplicating *some* items in the original inventory, we can implicitly duplicate *all* items in the original inventory:
-
-{{< mc-derivation >}}
-{ "engine": { "have": ["wood", "ore"], "show": "axe",
-  "script": { "rule": "assemble", "dir": "bwd" } } }
-{{< /mc-derivation >}}
-
-<!-- Original ASCII (kept for reference):
-```
-                       wood
-                       ore
-wood                   =====
-ore                  / stick
-======= <-[assemble]-
-axe                  \ wood
-                       ore
-                       =====
-                       iron
-```
--->
-This makes inventory management a non-issue! We don't even need to think about which items to duplicate at each "fork". In fact, it may be very difficult to predict which items to duplicate at a fork, since an item may be *evantually* needed at two different places very deep in the game tree.
-
-So design 3 gives us the peace of mind: just copy everything in the original inventory to each branch. If we ever need the extra copies, great! Otherwise, we can just ignore any unused copies. For example, in the diagram above, we technically don't *need* to duplicate `ore` into the upper branch, but it doesn't hurt to do so.
-
-Because design 3 renders the problem inventory management moot, we will assume it from now on.
-
-**Exercise**: Can you play the game using backward reasoning under design 3, without using any explicit {{< act "dup" >}} actions?
+**Exercise**: Can you play the game using backward reasoning under the inherited inventory design, i.e., without using any explicit {{< act "dup" >}} actions?
 
 
 {{< mc-derivation >}}
@@ -464,28 +348,28 @@ In summary, here's how the backward reasoning strategy works more generally:
 Diagrammatically, we can write this as follows:
 
 {{< mc-derivation >}}
-{ "diagram": { "inv": ["??"], "goal": "C", "rule": "f", "dir": "bwd",
-  "children": [ { "inv": ["??"], "goal": "A" }, { "inv": ["??"], "goal": "B" } ] } }
+{ "diagram": { "inv": ["?1"], "goal": "C", "rule": "f", "dir": "bwd",
+  "children": [ { "inv": ["?1"], "goal": "A" }, { "inv": ["?1"], "goal": "B" } ] } }
 {{< /mc-derivation >}}
 
 <!-- Original ASCII (kept for reference):
 ```
-              ??
+              ?1
               ====
-??          / A
+?1          / A
 ==== <-[f]-
-C           \ ??
+C           \ ?1
               ====
               B
 ```
 -->
-Importantly, each sub-state inherits the same inventory (`??`) as the original state (design 3), because we don't want to worry about inserting {{< act "dup" >}} actions at the right places all the time, which also makes the diagram much cleaner and easier to read.
+Importantly, each sub-state inherits the same inventory (`?1`) as the original state (design 3), because we don't want to worry about inserting {{< act "dup" >}} actions at the right places all the time, which also makes the diagram much cleaner and easier to read.
 
 Let's also compare backward reasoning to the forward reasoning diagram:
 
 {{< mc-derivation >}}
-{ "diagram": { "inv": ["A","B"], "goal": "??", "rule": "f", "dir": "fwd",
-  "children": [ { "inv": ["C"], "goal": "??" } ] } }
+{ "diagram": { "inv": ["A","B"], "goal": "G", "rule": "f", "dir": "fwd",
+  "children": [ { "inv": ["C"], "goal": "G" } ] } }
 {{< /mc-derivation >}}
 
 <!-- Original ASCII (kept for reference):
@@ -497,7 +381,7 @@ B           C
 ```
 -->
 
-The following slogan helps us remember the difference between forward and backward reasoning:
+The following slogans help us remember the difference between forward and backward reasoning:
 > Forward reasoning looks at the ***inventory*** (what we have).
 > 
 > Backward reasoning looks at the ***goal*** (what we want).
@@ -533,7 +417,7 @@ axe                  \ wood
 
 ## Whew!
 
-That was a lot of ground covered. We learned the rules of a game of construction and two different ways of playing it: forward and backward. We not only played a few rounds but also got to think like game designers ourselves.
+That was a lot of ground covered. We learned the rules of a game of construction and two different ways of playing it: forward and backward.
 
 Next up, we will introduce new designs to the game to make it a LOT more interesting, making a truly "open-world" game. Our new designs will allow a player to create arbitrarily complex contraptions that even the game designer might not have anticipated. Importantly, though, we will see that what we have been building all along is---believe it or not---logic[^gotcha]!
 

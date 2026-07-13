@@ -1,0 +1,7 @@
+{{- /* A leaf-state tag ("open goal" / "✓ in stock"), matching the markers inside <mc-derivation>. */ -}}
+{{- $state := .Get 0 | default "open" -}}
+{{- if eq $state "open" -}}
+<span class="mcg-leaf-tag is-open">open goal</span>
+{{- else -}}
+<span class="mcg-leaf-tag is-axiom">✓ in stock</span>
+{{- end -}}

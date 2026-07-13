@@ -1233,4 +1233,18 @@
     image-rendering: pixelated;
     vertical-align: middle;
   }
+  /* A leaf-state tag, matching the "open goal" / "✓ in stock" markers inside <mc-derivation>. */
+  .mcg-leaf-tag {
+    display: inline-block;
+    padding: 0.1em 0.5em;
+    font-family: var(--font-mono);
+    font-size: 0.78em;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    box-shadow: inset 1px 1px 0 color-mix(in srgb, var(--surface-color) 66%, #fff),
+                inset -1px -1px 0 color-mix(in srgb, var(--surface-color) 60%, #000);
+  }
+  .mcg-leaf-tag.is-open { color: var(--hover-color); background: color-mix(in srgb, var(--hover-color) 18%, var(--surface-color)); }
+  .mcg-leaf-tag.is-axiom { color: var(--link-color); background: color-mix(in srgb, var(--link-color) 16%, var(--surface-color)); }
 </style>
