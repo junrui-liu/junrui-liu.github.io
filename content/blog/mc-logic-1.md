@@ -119,7 +119,7 @@ That is, we already have a piece of `wood` and a piece of `ore` in our inventory
 
 We might reason like this: "Well, we eventually need an axe, and to make an axe, the {{< act "assemble" >}} action says we need a stick and iron..."
 
-Good! Let's pause right here and focus on the `stick` first. Since we have a piece of `wood`, we can use the {{< act "chop" >}} action to make a `stick`. Let's do that:
+Good! Let's pause right here and focus on the `stick` first. Since we have a piece of `wood`, we can use the {{< act "chop" >}} action to make a `stick`. Let's see that in action by clicking the NEXT button:
 
 {{< mc-derivation step="0" >}}
 { "engine": { "have": ["wood", "ore"], "show": "axe",
