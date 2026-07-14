@@ -1019,7 +1019,7 @@
   /* ----- Table of contents ----- */
   .post-toc {
     position: fixed;
-    bottom: 4rem;
+    bottom: 2rem;
     /* Left gutter, hugging the reading column; the right gutter is now
        reserved for Tufte-style sidenotes. */
     left: max(1.5rem, calc(50vw - var(--width) / 2 - 2rem - 170px));
@@ -1047,7 +1047,7 @@
   }
 
   .post-toc nav>ul {
-    border-left: 2px solid var(--toc-border-color);
+    border-right: 2px solid var(--toc-border-color);
   }
 
   .post-toc nav li {
@@ -1059,9 +1059,10 @@
     color: var(--toc-text-color);
     background: none;
     text-decoration: none;
+    text-align: right;
     padding: 0.2rem 0.75rem;
-    margin: 0 0 0 -2px;
-    border-left: 2px solid transparent;
+    margin: 0 -2px 0 0;
+    border-right: 2px solid transparent;
     border-radius: 0;
     font-size: 1em;
     font-weight: 400;
@@ -1069,11 +1070,11 @@
   }
 
   .post-toc nav ul ul a {
-    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 
   .post-toc nav ul ul ul a {
-    padding-left: 2.25rem;
+    padding-right: 2.25rem;
   }
 
   .post-toc nav a:hover {
@@ -1085,7 +1086,7 @@
   .post-toc nav a.active-toc,
   .post-toc nav a.active-toc:hover {
     color: var(--link-color);
-    border-left-color: var(--link-color);
+    border-right-color: var(--link-color);
     background: none;
   }
 

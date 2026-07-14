@@ -9,17 +9,16 @@ tags = [
 
 ## Introduction
 
-This blog post is intended to be the first in a series where I try out an alternative approach to teaching formal logic and proofs, using a crafting/resource management game as a vehicle. I will be taking liberal inspiration and examples from the wonderful [Minecraft](https://en.wikipedia.org/wiki/Minecraft) video game, a game that I enjoy [^mc].
+This blog post is intended to be the first in a series where I try out an alternative approach to teaching formal logic and proofs, using a crafting/resource management game as a vehicle. I will be taking liberal inspiration and examples from the wonderful [Minecraft](https://en.wikipedia.org/wiki/Minecraft) video game, a game that I enjoy[^mc].
 
 [^mc]: along with apparently [400 million other people](https://en.wikipedia.org/wiki/Minecraft#Sales)
 
-The reason I wanted to try something new is that, although I've always found logic fascinating, it has a reputation for being quite abstract and challenging in classroom settings. I came up with this Minecraft approach while preparing for a teaching demo talk I gave during my recent academic job interviews, which I had a lot of fun crafting (ha!). So I thought it would be fun to share it here. I hope it'll make learning logic not only *fun and intuitive* through (literal) Minecraft gameplay, but also *interactive* by later incorporating a live coding environment called an [interactive theorem prover](https://en.wikipedia.org/wiki/Proof_assistant) [^itp], which will allow us to play logic as a (surprisingly addictive) game with real-time feedback.
+The reason I wanted to try something new is that, although I've always found logic fascinating, it has a reputation for being quite abstract and challenging in classroom settings. I came up with this Minecraft approach while preparing for a teaching demo talk I gave during my recent academic job interviews, which I had a lot of fun crafting (ha!), and I thought it would be fun to share it here. I hope it'll make learning logic not only *fun and intuitive* through (literal) Minecraft gameplay, but also *interactive* by later incorporating a live coding environment called an [interactive theorem prover](https://en.wikipedia.org/wiki/Proof_assistant)[^itp], which will allow us to play logic as a (surprisingly addictive) game with real-time feedback.
 
-[^itp]: which I've been enjoying using in [my research](https://doi.org/10.1109/SP54263.2024.00078), and which also has tons of potential in making learning CS more engaging---see [this paper](https://dl.acm.org/doi/10.1145/3758317.3759679), for example.
+[^itp]: which I've enjoyed using in [my research](https://doi.org/10.1109/SP54263.2024.00078), and which also has tons of potential in making learning CS more engaging---see [this paper](https://dl.acm.org/doi/10.1145/3758317.3759679), for example.
 
 
-Hopefully, the series is accessible to those who have seen a bit of Boolean logic (like conjunction `∧` and implication `→`), but other than that, no background in formal logic or proof techniques is assumed.
-[^expert]
+Hopefully, the series is accessible to those who have seen a bit of Boolean logic (like conjunction `∧` and implication `→`), but other than that, no background in formal logic or proof techniques is assumed.[^expert]
 
 [^expert]: Spoiler for those of you who are logic experts: {{< spoiler >}} the underlying logic I will be using is *[intuitionistic](https://en.wikipedia.org/wiki/Intuitionistic_logic) [sequent calculus](https://en.wikipedia.org/wiki/Sequent_calculus)*, rather than (more conventional) [classical](https://en.wikipedia.org/wiki/Classical_logic) [axiomatic logic](https://en.wikipedia.org/wiki/Axiomatic_system) or [natural deduction](https://en.wikipedia.org/wiki/Natural_deduction). Moreover, the presentation will have a strong [linear/substructural logic](https://en.wikipedia.org/wiki/Linear_logic) flavor to it. 
 {{< /spoiler >}}
@@ -28,22 +27,21 @@ Hopefully, the series is accessible to those who have seen a bit of Boolean logi
 <!-- However, there won't be any mention of sequent calculus will be made in this blog post, and the reader is not expected to have any prior knowledge of it. At the end of the blog post, I will briefly discuss how each concept in the game maps to its counterpart in sequent calculus. -->
 
 
-Without further ado, let's dive in!
+Without further ado, let's dive in.
 
 ## Ground rules
 
-Let's play a game: a game of **construction**, where we will be *making* or *crafting* things out of other things. It's a game that you have probably played before, in many different contexts:
+Let's play a game of **construction**, where we will be *making* or *crafting* things out of other things. It's a game that you have probably played before, in many different contexts:
 - If you like cooking or baking, you may have made a dish out of ingredients, e.g., a cake out of flour, sugar, eggs, and butter.
 - If you took a chemistry class, you learned that the water molecule (H₂O) can be made out of hydrogen (H₂) and oxygen (O₂).
-- If you have played Minecraft, you most likely crafted an iron axe out of a wooden stick and iron.
 
 Keep those intuitions in mind, because they will serve you well in the game we are about to play.
 
 Our game will be played as follows:
 - There will be **items** which can be *made*, or *used* to make other items.
-- As the game designer, I will prescribe a set of **actions** that you can use to combine existing items to make new items.
-- At any point in time, the game is in a certain **state**, which consists of an **inventory** of items that you currently have, and a single **goal** item that you are trying to make.
-- You **win** the game if you make the goal item. That is, if in the current state, the goal item is right there in your inventory!
+- As the game designer, I will prescribe a set of **actions** that combine existing items to make new items.
+- At any point in time, the game is in a certain **state**, which consists of an **inventory** of items that we currently have, and a single **goal** item that we are trying to make.
+- We **win** the game if we make the goal item. That is, if in the current state, the goal item is right there in our inventory!
 
 We will visualize a game that transitions from one state to another as follows:
 
@@ -66,11 +64,7 @@ Here's how to read this diagram:
 2. We then apply the action `A, B -> C`, which consumes items `A` and `B` from our inventory and produces item `C`.
 3. After this action, we are now in a new state where our inventory contains item `C`. Both inventory item `D` and goal item `G` remain unaffected by this action.
 
-I haven't told you what the items are and what actions are available to us. In fact, this is where the game designer gets to be creative and have lots of fun. 
-
-For now, I will role-play as the game designer, and you will role-play as the player: I will tell you what items are available and what actions you can take, and your job is to figure out how to make the goal item from the items in your inventory. Once you become more comfortable with the game, you'll get a chance to role-play as game designers! How cool is that?
-
-So let me introduce you to the items and the actions in our game, which are all inspired by... Minecraft!
+I haven't told you what the items are and what actions are available to us yet. Let me introduce them now, all inspired by... Minecraft!
 
 
 ## Let's play Minecraft
@@ -111,7 +105,7 @@ ore
 axe
 ```
 -->
-That is, we already have a piece of `wood` and a piece of `ore` in our inventory, and our goal is to make an `axe`, which is marked with an {{< leaf-tag "open" >}} tag since the goal item is not yet in our inventory.
+That is, assume that we already have a piece of `wood` and a piece of `ore` in our inventory, and our goal is to make an `axe`, which is marked with an {{< leaf-tag "open" >}} tag since the goal item is not yet in our inventory.
 
 **Exercise**: Take a pause, and think about how you would play this game. What action would you take first?
 
@@ -119,7 +113,7 @@ That is, we already have a piece of `wood` and a piece of `ore` in our inventory
 
 We might reason like this: "Well, we eventually need an axe, and to make an axe, the {{< act "assemble" >}} action says we need a stick and iron..."
 
-Good! Let's pause right here and focus on the `stick` first. Since we have a piece of `wood`, we can use the {{< act "chop" >}} action to make a `stick`. Let's see that in action by clicking the NEXT button:
+Good! Let's pause right there and focus on the `stick` first. Since we have a piece of `wood`, we can use the {{< act "chop" >}} action to make a `stick`. Let's see that in action by clicking the NEXT button:
 
 {{< mc-derivation step="0" >}}
 { "engine": { "have": ["wood", "ore"], "show": "axe",
@@ -128,9 +122,7 @@ Good! Let's pause right here and focus on the `stick` first. Since we have a pie
 
 Now, let's focus on the `iron`. To make `iron`, we need to use the {{< act "smelt" >}} action, which requires `ore` and `charcoal`. We already have `ore`, but we don't have `charcoal` yet. How can we get `charcoal`? Well, we can use the {{< act "burn" >}} action on `wood` to make `charcoal`...
 
-Wait, we don't have any `wood` left in our inventory! We just used it to make a `stick`. So technically, we're stuck, unless we started with more `wood` in our inventory. 
-
-
+Wait, we don't have any `wood` left in our inventory! We just used it to make a `stick`, which means we're technically stuck, unless we started with more `wood` in our inventory.
 
 ## Honorable cheating
 
@@ -156,8 +148,8 @@ Intuitively, what this cheat code says is that *possessing one copy of an item i
 
 [^dup]: If you are familiar with Minecraft, {{< act "dup" >}} might remind you of the differences between ["survival mode" and "creative mode"](https://www.minecraft.net/en-us/article/creative-vs-survival-mode): in survival mode, you can't duplicate items; in creative mode, you can not only duplicate items, but you can also create items out of thin air. In our game, without {{< act "dup" >}}, the game is played exactly like Minecraft's survival mode; with {{< act "dup" >}}, the game sits somewhere in between survival and creative modes, since we can duplicate items, but we can't create them out of thin air.
 
-[^nocheat]: In case you don't like this cheat code and want to play the game without it, that's totally valid! That'll give you a slightly different "mode" that makes it different from the "base game" which assumes {{< act "dup" >}}. In fact, the game mode without {{< act "dup" >}} will lead us to some fascinating discussions about the nature of logic and proofs and to the discovery of non-standard logics. We'll touch on that at the very end of this blog post.
-But for now, let's assume we play in a mode where {{< act "dup" >}} is available, since we'll have more interesting stuff to worry about than inventory management!
+[^nocheat]: In case you'd rather play without this cheat code, that's totally valid too, giving you a different "mode" of the game, one that we'll probably come back to at the very end of this blog post.
+For now, though, let's assume {{< act "dup" >}} is available, since we'll have more interesting stuff to worry about than inventory management!
 
 I also want to bring your attention to another interesting aspect of this action, which differs from the other four actions ({{< act "burn" >}}, {{< act "chop" >}}, {{< act "smelt" >}}, {{< act "assemble" >}}) in an important way: the item `A` involved in the action is *generic*. That is, item `A` is just a placeholder for any item in our game. We can specialize {{< act "dup" >}} to duplicate wood, charcoal, iron, and so on, by replacing the generic placeholder `A` with a specific item (as long as the thing we are duplicating is *already* in our inventory). Heck, the exact name of the placeholder `A` is not important, and we could have named it `X` or `FireInTheHole`. In contrast, the other four actions are *specific* to the items involved in them. For example, {{< act "burn" >}} is specific to `wood` and `charcoal`, and we can't use it to burn `ore` into `iron`. 
 
@@ -168,9 +160,9 @@ We will follow the convention that placeholders are capital letters `A`, `B`, `C
 
 With our new cheat code in hand, we can now finish our previous game! 
 
-Recall that the reason we couldn't fully make an axe before was that we needed *two* pieces of wood (one for the stick, and one for the charcoal to help smelt iron), but we started with only one. So let's just use {{< act "dup" >}} on `wood`, after which we play the game as before:
+Recall that the reason we couldn't fully make an axe before was that we needed *two* pieces of wood (one for the stick, and one for the charcoal to help smelt iron), but we started with only one. Let's just use {{< act "dup" >}} on `wood`, after which we play the game as before:
 
-{{< mc-derivation step="0" >}}
+{{< mc-derivation step="1" >}}
 { "engine": { "have": ["wood", "ore"], "show": "axe",
   "script": { "rule": "dup", "hints": { "A": "wood" }, "children": [ { "rule": "chop", "children": [ { "rule": "burn", "children": [ { "rule": "smelt", "children": [ { "rule": "assemble" } ] } ] } ] } ] } } }
 {{< /mc-derivation >}}
@@ -184,21 +176,19 @@ ore              ore               ore               ore                iron    
 axe              axe               axe               axe                axe                   axe
 ```
 -->
-In the last state, the goal item `axe` is in our inventory, so we have successfully completed the game! Hooray!
-
-
+In the last state, the goal item `axe` is in our inventory, so we have successfully completed the game. Nice.
 
 ## Alternative thinking
 
-You may have noticed that how the game state evolves in the above diagram runs counter to the way we initially reasoned about the game (and arguably the more "natural" way of thinking): previously, our reasoning started with the eventual goal item `axe`, and we worked backwards to figure out what we needed to make it (namely, a `stick` and `iron`); then we recursively broke down those "sub-goals" to figure out further items we need.
+You may have noticed that how the game state evolves in the above diagram runs counter to the way we initially reasoned about the game (and arguably the more "natural" way of thinking). Previously, our reasoning started with the eventual goal item `axe`, and we worked **backwards** to figure out what we needed to make it (namely, a `stick` and `iron`); then we recursively broke down those "sub-goals" to figure out further items we need.
 
-But when we actually played the game by drawing the state transition diagram, we started with the items in our inventory in the *initial state* (namely, `wood` and `ore`) and applied **forward reasoning** to figure out what we could make with them, eventually leading us to the goal item `axe`.
+But when we actually played the game by drawing the state transition diagram, we started with the items in our inventory in the *initial state* (namely, `wood` and `ore`) and reasoned **forward** to figure out what we could make with them, eventually leading us to the goal item `axe`.
 
-Forward reasoning means that we always focus on what's *above* the line -- items we already have. When reasoning forward, we always have the risk of making something that we don't need eventually, or spending a resource that we should have saved for something else. So we always have to cross our fingers and pray that we're indeed making progress.
+Forward reasoning means that we always focus on what's *above* the line---items we already have. When reasoning forward, we always have the risk of making something that we don't need eventually, or spending a resource that we should have saved for something else, meaning we always have to cross our fingers and pray that we're indeed making progress.
 
 Instead, can we shift our focus onto what's *below* the line---our ultimate goal---and progressively decompose it into smaller sub-goals that are hopefully easier to tackle? This way, we know that every step we take is a step that we must take towards our ultimate goal, and we won't waste any resources on things that don't help us get there.
 
-Indeed, this is possible! In fact, **backward reasoning** is a very effective strategy that complements forward reasoning. In backward reasoning, we always focus on the goal item and ask ourselves: "What do we need to make this item?" Then we recursively break down the sub-goals until we reach items that are already in our inventory.
+This is indeed possible. **Backward reasoning** is a very effective strategy that complements forward reasoning. In backward reasoning, we always focus on the goal item and ask ourselves: "What do we need to achieve this goal?" Then we recursively break down the sub-goals until we reach items that are already in our inventory.
 
 Let's instead apply backward reasoning to play the same game. The initial state of the game is the same as before:
 
@@ -214,7 +204,7 @@ ore
 axe
 ```
 -->
-This time, we simply ignore the inventory part, instead focusing on the goal item `axe`. We ask ourselves: "What do we need to make an axe?" The answer is given by the {{< act "assemble" >}} action: we need a `stick` and `iron`. So we can decompose our goal into two sub-goals: make a `stick` and make `iron`. Let's write that down:
+This time, we simply ignore the inventory part, instead focusing on the goal item `axe`. We ask ourselves: "What do we need to make an axe?" The answer is given by the {{< act "assemble" >}} action: we need a `stick` and `iron`, which means we can decompose our goal into two sub-goals: make a `stick` and make `iron`. Let's write that down:
 
 {{< mc-derivation >}}
 { "diagram": { "inv": ["wood","ore"], "goal": "axe", "rule": "assemble", "dir": "bwd",
@@ -232,26 +222,26 @@ axe                  \ ?2
                        iron
 ```
 -->
-You see, using backward reasoning, the diagram is no longer a linear sequence: the initial state is "forked" into two independent sub-states, one for each sub-goal. For each sub-goal, we will tackle them separately, which may further fork into more sub-goals, and so on. So our diagram will eventually grow into a tree. (Note that we also switch the direction of the arrow to indicate that we are applying the {{< act "assemble" >}} action right-to-left.)
+You see, using backward reasoning, the diagram is no longer a linear sequence: the initial state is "forked" into two independent branches, one for each sub-goal. We will tackle each sub-goal separately, which may further fork into more sub-goals, and so on. Our diagram will eventually grow into a **tree**, whose root, the initial state, is on the left and the tree grows towards the right. (Note that we also switch the direction of the arrow to indicate that we are applying the {{< act "assemble" >}} action right-to-left.)
 
-In the backward setting, a subtle yet important question arises: what should the inventories of the sub-states be (marked `?1` and `?2` in the diagram above)? In other words, when we fork the game state into two sub-states, how should we manage the inventory?
+In the backward setting, a subtle yet important question arises: what should the inventories of the branches be (marked `?1` and `?2` in the diagram above)? In other words, when we fork the game state into two branches, how should we manage the inventory?
 
 Note that this question is a *game design question*, since it will affect all games that involve backward reasoning and hence potentially affect every player.
 
 ## Inventory management
 
-I think the most natural approach that you might think of is to "split" the inventory into two disjoint parts, one for each sub-state. For example, we might allocate `wood` to the left sub-state and `ore` to the right sub-state, which would give us the following diagram:
+The most natural approach that you might think of is to "split" the inventory into two disjoint parts, one for each branch. For example, we might allocate `wood` to the left branch and `ore` to the right branch, which would give us the following diagram:
 
 {{< mc-derivation >}}
 { "diagram": { "inv": ["wood","ore"], "goal": "axe", "rule": "assemble", "dir": "bwd",
   "children": [ { "inv": ["wood"], "goal": "stick" }, { "inv": ["ore"], "goal": "iron" } ] } }
 {{< /mc-derivation >}}
 
-Intuitive, this makes sense: the meaning of our initial state is that an `axe` must be made from items in the initial inventory; since `axe` can be made from `stick` and `iron`, some of the items in the initial inventory must be used to make `stick`, and the rest must be used to make `iron`. So it seems natural to split the inventory into two disjoint parts, one for each sub-state.
+Intuitively, this makes sense. The meaning of our initial state is that an `axe` must be made from items in the initial inventory; since `axe` can be made from `stick` and `iron`, some of the items in the initial inventory must be used to make `stick`, and the rest must be used to make `iron`; hence it seems natural to split the inventory into two disjoint parts, one for each branch.
 
-Let's call this approach to inventory management the **split inventory** design. There is absolutely nothing wrong with this approach [^linear] --- it's just one of the many ways to design the game. That said, this approach makes the game more difficult to play, because we must correctly predict which items to allocate to each sub-state.
+Let's call this approach to inventory management the **split inventory** design. There is absolutely nothing wrong with this approach[^linear]. It's just one of the many ways to design the game. That said, this approach makes the game more difficult to play, because we must correctly predict which items to allocate to each branch, often before we can know which items will actually be needed.
 
-To see this, let's look at the previous diagram. In fact, if we try to continue the game, we will quickly discover that the game is stuck for exactly the same reason as before: the lower branch needs another piece of `wood` to make `charcoal` for smelting `iron`, but the upper branch already used up the only piece of `wood` in the inventory to make a `stick`. Thus, we would have to backtrack, insert a {{< act "dup" >}} action to duplicate `wood`, and then have the foresight to allocate one piece of `wood` to the upper branch and the other piece of `wood` to the lower branch:
+To see this, let's look at the previous diagram. If we try to continue the game, we will quickly discover that the game is stuck for exactly the same reason as before: the lower branch needs another piece of `wood` to make `charcoal` for smelting `iron`, but the upper branch already used up the only piece of `wood` in the inventory to make a `stick`. Thus, we would have to backtrack, insert a {{< act "dup" >}} action to duplicate `wood`, and then have the foresight to allocate one piece of `wood` to the upper branch and the other piece of `wood` to the lower branch:
 
 
 {{< mc-derivation >}}
@@ -275,9 +265,9 @@ axe              axe                  \ wood
 
 [^linear]: It turns out that there are actual logics that are based on this idea of splitting the inventory into disjoint parts, for example, [linear logics](https://en.wikipedia.org/wiki/Linear_logic).
 
-Correctly managing the inventory can get more challenging as our goal becomes more complex, where the game tree eventually grows very large and deep. In those cases, we need some serious foresight and advanced planning to make sure we're allocating the right items to the right sub-states. 
+Correctly managing the inventory can get more challenging as our goal becomes more complex and the game tree has to grow deep as a result. In those cases, we need some serious foresight and advanced planning to make sure we're allocating the right items to the correct branches.
 
-Instead, to make our life easier, I argue that {{< act "dup" >}} actually allows us to *simplify* our inventory management approach: instead of carefully splitting the inventory into two disjoint parts, we are justified in allowing *each sub-state to inherit the same inventory as the original state*. For example, the following diagram illustrates another valid way to *design* the game, where both sub-states inherit `wood` and `ore`:
+To make our life easier, though, I argue that {{< act "dup" >}} actually allows us to *simplify* our inventory management approach: instead of carefully splitting the inventory into two disjoint parts, we are justified in allowing *each branch to inherit the same inventory as the original state*. For example, the following diagram illustrates another valid way to manage the inventory, where both branches inherit `wood` and `ore`:
    
 {{< mc-derivation step="1" >}}
 { "engine": { "have": ["wood", "ore"], "show": "axe",
@@ -298,13 +288,9 @@ Instead, to make our life easier, I argue that {{< act "dup" >}} actually allows
    ```
    --->
 
-Let's call this alternative approach the **inherited inventory** design. 
+Let's call this alternative approach the **inherited inventory** design. I argue that this design is also justified. Essentially, the two designs are essentially equivalent in their expressive power: if a player can win the game under one design, then they can also win the game under the other design.
 
-I argue that this design also makes sense, because we could have easily
-1. inserted one {{< act "dup" >}} to every item in the original inventory, so that every item has two copies available before we fork, and
-2. allocated one copy to the upper branch and the other copy to the lower branch.
-
-Another way to think about it is that the diagram under the inherited inventory design is just a collapsed version of the diagram under the split inventory design by hiding some of the {{< act "dup" >}} actions that we would have had to explicitly insert in the split inventory design. For example, we can think of the above diagram as a collapsed version of the following diagram, where we explicitly inserted {{< act "dup" >}} actions to duplicate `wood` and `ore` before forking the game state:
+Specifically, a game-tree diagram played under the inherited inventory design is just a collapsed version of some other diagram under the split inventory design: in the former diagram, we are just hiding some of the {{< act "dup" >}} actions that we would have had to explicitly insert in the latter diagram. For example, we can think of the above diagram as a collapsed version of the following diagram, where we explicitly inserted {{< act "dup" >}} actions to duplicate `wood` and `ore` before forking the game state:
 
 {{< mc-derivation >}}
 { "diagram": { "inv": ["wood","ore"], "goal": "axe", "rule": "dup", "dir": "fwd",
@@ -313,11 +299,9 @@ Another way to think about it is that the diagram under the inherited inventory 
       "children": [ { "inv": ["wood","ore"], "goal": "stick" }, { "inv": ["wood","ore"], "goal": "iron" } ] } ] } ] } }
 {{< /mc-derivation >}}
 
-In some sense, the two designs are essentially equivalent in their expressive power: if a player can win the game under one design, then they can also win the game under the other design. 
+The inherited inventory design has one important advantage: it arguably makes the game easier to play and is more "forgiving", because it saves us from having to plan ahead and explicitly write out {{< act "dup" >}} actions. Instead, we just duplicate *every* item so that it becomes available to all branches for the rest of the game. If we happen to need that item down the road, then great; if we don't, then no harm done, since possessing unused items can never lose us the game.
 
-However, the inherited inventory design arguably makes the game easier to play and is more "forgiving", because it saves us from having to plan ahead and explicitly write out {{< act "dup" >}} actions. Instead, we just duplicate *every* item so that it becomes available to all sub-states for the rest of the game. If we happen to need that item down the road, then great; if we don't, then no harm done, since possessing unused resource doesn't invalidate our win condition.
-
-Therefore, we will assume the inherited inventory design for the rest of this blog series, as it makes the lifes of the players easier.
+Therefore, we will assume the inherited inventory design for the rest of this blog series, as it makes the lives of the players easier.
 
 
 **Exercise**: Can you play the game using backward reasoning under the inherited inventory design, i.e., without using any explicit {{< act "dup" >}} actions?
@@ -341,11 +325,11 @@ Therefore, we will assume the inherited inventory design for the rest of this bl
 
 ## Back and forth
 
-In summary, here's how the backward reasoning strategy works more generally:
+In summary, here's how backward reasoning works more generally:
 
-> If we have an action {{< act "f" >}}: `A, B -> C`, and our current goal is to make `C`, then we can apply {{< act "f" >}} backwards to fork the game state into two sub-states, one whose goal is `A` and one whose goal is `B`. The inventory of each sub-state is identical to the original inventory.
+> If we have an action {{< act "f" >}}: `A, B -> C`, and our current goal is to make `C`, then we can apply {{< act "f" >}} backwards to fork the game state into two branches, one whose goal is `A` and one whose goal is `B`. The inventory of each branch is identical to the original inventory.
 
-Diagrammatically, we can write this as follows:
+Diagrammatically, we can represent backward reasoning as follows:
 
 {{< mc-derivation >}}
 { "diagram": { "inv": ["?1"], "goal": "C", "rule": "f", "dir": "bwd",
@@ -363,7 +347,7 @@ C           \ ?1
               B
 ```
 -->
-Importantly, each sub-state inherits the same inventory (`?1`) as the original state (design 3), because we don't want to worry about inserting {{< act "dup" >}} actions at the right places all the time, which also makes the diagram much cleaner and easier to read.
+Importantly, each branch inherits the *same* inventory (`?1`) as the original state, following the inherited inventory design, because we don't want to worry about inserting {{< act "dup" >}} actions at the right places all the time, which also makes the diagram much cleaner and easier to read.
 
 Let's also compare backward reasoning to the forward reasoning diagram:
 
@@ -386,7 +370,7 @@ The following slogans help us remember the difference between forward and backwa
 > 
 > Backward reasoning looks at the ***goal*** (what we want).
 
-**Exercise**: Can you complete the following game using a *mix* of forward and backward reasoning. Is there an order of mixing forward and backward reasoning that takes the fewest number of actions? Is there an order that you find the most intuitive?
+**Exercise**: Can you complete the following game using a *mix* of forward and backward reasoning? Is there an order of mixing forward and backward reasoning that takes the fewest number of actions? Is there an order that you find the most intuitive?
 
 
 {{< mc-derivation >}}
