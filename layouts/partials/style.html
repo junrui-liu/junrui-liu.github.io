@@ -1017,12 +1017,24 @@
   }
 
   /* ----- Table of contents ----- */
-  .post-toc {
-    position: fixed;
+  /* A zero-height sticky rail, bounded by the article (its parent). It pins
+     to the viewport bottom while the body is tall, then rides up smoothly
+     with the body once the body's end scrolls past — all compositor-driven,
+     so there's no scroll jank. */
+  .post-toc-rail {
+    position: sticky;
     bottom: 2rem;
-    /* Left gutter, hugging the reading column; the right gutter is now
-       reserved for Tufte-style sidenotes. */
-    left: max(1.5rem, calc(50vw - var(--width) / 2 - 2rem - 170px));
+    height: 0;
+    z-index: 1;
+  }
+
+  .post-toc {
+    position: absolute;
+    bottom: 0;
+    /* The reading column and this gutter are both centred on 50vw, so the
+       horizontal offset between them is constant (the 50vw cancels): the
+       column's left padding (24px) + the gap (2rem) + the TOC's own width. */
+    left: calc(-170px - 2rem - 24px);
     width: 170px;
     max-height: calc(100vh - 8rem);
     overflow-y: auto;
@@ -1047,7 +1059,7 @@
   }
 
   .post-toc nav>ul {
-    border-right: 2px solid var(--toc-border-color);
+    border-left: 2px solid var(--toc-border-color);
   }
 
   .post-toc nav li {
@@ -1059,10 +1071,10 @@
     color: var(--toc-text-color);
     background: none;
     text-decoration: none;
-    text-align: right;
+    text-align: left;
     padding: 0.2rem 0.75rem;
-    margin: 0 -2px 0 0;
-    border-right: 2px solid transparent;
+    margin: 0 0 0 -2px;
+    border-left: 2px solid transparent;
     border-radius: 0;
     font-size: 1em;
     font-weight: 400;
@@ -1070,11 +1082,24 @@
   }
 
   .post-toc nav ul ul a {
-    padding-right: 1.5rem;
+    padding-left: 1.5rem;
   }
 
   .post-toc nav ul ul ul a {
-    padding-right: 2.25rem;
+    padding-left: 2.25rem;
+  }
+
+  /* Sub-sections stay hidden until their parent section is the one being
+     read; the enclosing JS toggles .toc-expanded as the reader scrolls.
+     A plain display toggle (rather than max-height + overflow) avoids
+     clipping the active ###'s side-line, which sits 2px into the left
+     margin to align with the bar. */
+  .post-toc.js-toc nav>ul>li>ul {
+    display: none;
+  }
+
+  .post-toc.js-toc nav>ul>li.toc-expanded>ul {
+    display: block;
   }
 
   .post-toc nav a:hover {
@@ -1086,8 +1111,22 @@
   .post-toc nav a.active-toc,
   .post-toc nav a.active-toc:hover {
     color: var(--link-color);
-    border-right-color: var(--link-color);
+    border-left-color: var(--link-color);
     background: none;
+  }
+
+  /* Parent (##) of the ### currently being read: keep its side-line fully
+     lit, the same as a directly-active section. */
+  .post-toc nav a.active-toc-parent {
+    border-left-color: var(--link-color);
+  }
+
+  /* The nested (###) heading you're actually in gets a softer side-line, so
+     the parent (##) reads as the primary marker. Fading toward transparent
+     (rather than the border color) keeps it visible in both light and dark,
+     where the border color pulls in opposite contrast directions. */
+  .post-toc nav ul ul a.active-toc {
+    border-left-color: color-mix(in srgb, var(--link-color) 35%, transparent);
   }
 
   /* ----- Footnotes → Tufte sidenotes ----- */

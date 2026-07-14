@@ -11,16 +11,24 @@
 </p>
 {{ end }}{{ end }}
 
+<div class="post-body">
 <article class="post-content">
     {{ .Content }}
 </article>
-
-
 {{ if and (eq .Type "blog") (.TableOfContents) }}
-<aside class="post-toc">
-    {{ .TableOfContents }}
-</aside>
+{{/* The TOC's sticky rail is bounded by .post-body (which wraps only the
+     article), so bottom-sticky pins it to the viewport bottom while the body
+     is tall, then it rides up with the body once the body's end scrolls past
+     — no per-frame JS. Keeping the rail as a sibling *inside* this wrapper
+     (rather than inside <article>) also keeps the tags <p> below from being
+     `article+p`, which would trigger the pill styling in style.html. */}}
+<div class="post-toc-rail">
+    <aside class="post-toc">
+        {{ .TableOfContents }}
+    </aside>
+</div>
 {{ end }}
+</div>
 
 
 <p>
@@ -108,7 +116,18 @@
             .filter((item) => item.target);
         if (!items.length) return;
 
+        // Top-level (##) entries own a nested (###) sublist that we keep
+        // collapsed until that section is the one being read, to keep the
+        // TOC from turning into a wall of subheadings.
+        const topLevelUl = toc.querySelector('nav > ul');
+        const topLevelItems = topLevelUl
+            ? Array.from(topLevelUl.querySelectorAll(':scope > li'))
+            : [];
+        if (topLevelItems.length) toc.classList.add('js-toc');
+
         let activeLink = null;
+        let parentLink = null;
+        let expandedLi = null;
         let scheduled = false;
 
         function update() {
@@ -124,6 +143,29 @@
             const atBottom = window.scrollY + window.innerHeight >=
                 document.documentElement.scrollHeight - 4;
             if (atBottom) current = items[items.length - 1].link;
+
+            // Default to the first section before any heading has been passed.
+            const containingLi = current
+                ? topLevelItems.find((li) => li.contains(current))
+                : topLevelItems[0];
+            if (containingLi !== expandedLi) {
+                if (expandedLi) expandedLi.classList.remove('toc-expanded');
+                if (containingLi) containingLi.classList.add('toc-expanded');
+                expandedLi = containingLi;
+            }
+
+            // The top-level (##) link owning the section being read. When the
+            // reader is inside a nested (###) heading, keep the parent lit up
+            // with a full-strength marker; the ### link gets a subtler one.
+            const parent = containingLi
+                ? containingLi.querySelector(':scope > a')
+                : null;
+            const newParent = parent && parent !== current ? parent : null;
+            if (newParent !== parentLink) {
+                if (parentLink) parentLink.classList.remove('active-toc-parent');
+                if (newParent) newParent.classList.add('active-toc-parent');
+                parentLink = newParent;
+            }
 
             if (current === activeLink) return;
             if (activeLink) activeLink.classList.remove('active-toc');

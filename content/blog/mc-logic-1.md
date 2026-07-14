@@ -9,19 +9,20 @@ tags = [
 
 ## Introduction
 
-This blog post is intended to be the first in a series where I try out an alternative approach to teaching formal logic and proofs, using a crafting/resource management game as a vehicle. I will be taking liberal inspiration and examples from the wonderful [Minecraft](https://en.wikipedia.org/wiki/Minecraft) video game, a game that I enjoy[^mc].
+This blog post is intended to be the first in a series where I try out an alternative approach to teaching formal logic and proofs, using a crafting/resource management game as a vehicle. I will be taking liberal inspiration and examples from the wonderful [Minecraft](https://en.wikipedia.org/wiki/Minecraft) video game.
 
-[^mc]: along with apparently [400 million other people](https://en.wikipedia.org/wiki/Minecraft#Sales)
+The reason I wanted to try something new is that, although I've always found logic fascinating, it has a reputation for being quite abstract and challenging in classroom settings.[^when] I hope it'll make learning logic not only *fun and intuitive* through (literal) Minecraft gameplay, but also *interactive* by later incorporating a live coding environment called an [interactive theorem prover](https://en.wikipedia.org/wiki/Proof_assistant)[^itp], which will allow us to play logic as a (surprisingly addictive) game with real-time feedback.
 
-The reason I wanted to try something new is that, although I've always found logic fascinating, it has a reputation for being quite abstract and challenging in classroom settings. I came up with this Minecraft approach while preparing for a teaching demo talk I gave during my recent academic job interviews, which I had a lot of fun crafting (ha!), and I thought it would be fun to share it here. I hope it'll make learning logic not only *fun and intuitive* through (literal) Minecraft gameplay, but also *interactive* by later incorporating a live coding environment called an [interactive theorem prover](https://en.wikipedia.org/wiki/Proof_assistant)[^itp], which will allow us to play logic as a (surprisingly addictive) game with real-time feedback.
+[^when]: I came up with this Minecraft approach while preparing for a teaching demo talk I gave during my recent academic job interviews, which I had a lot of fun crafting (ha!), and I thought it would be fun to share it here.
 
 [^itp]: which I've enjoyed using in [my research](https://doi.org/10.1109/SP54263.2024.00078), and which also has tons of potential in making learning CS more engaging---see [this paper](https://dl.acm.org/doi/10.1145/3758317.3759679), for example.
 
 
-Hopefully, the series is accessible to those who have seen a bit of Boolean logic (like conjunction `∧` and implication `→`), but other than that, no background in formal logic or proof techniques is assumed.[^expert]
+Hopefully, the series is accessible to those who have seen a bit of Boolean logic (like conjunction `∧` and implication `→`), but other than that, no background in formal logic or proof techniques is assumed.
 
-[^expert]: Spoiler for those of you who are logic experts: {{< spoiler >}} the underlying logic I will be using is *[intuitionistic](https://en.wikipedia.org/wiki/Intuitionistic_logic) [sequent calculus](https://en.wikipedia.org/wiki/Sequent_calculus)*, rather than (more conventional) [classical](https://en.wikipedia.org/wiki/Classical_logic) [axiomatic logic](https://en.wikipedia.org/wiki/Axiomatic_system) or [natural deduction](https://en.wikipedia.org/wiki/Natural_deduction). Moreover, the presentation will have a strong [linear/substructural logic](https://en.wikipedia.org/wiki/Linear_logic) flavor to it. 
+<!-- [^expert]: Spoiler for those of you who are logic experts: {{< spoiler >}} the underlying logic I will be using is *[intuitionistic](https://en.wikipedia.org/wiki/Intuitionistic_logic) [sequent calculus](https://en.wikipedia.org/wiki/Sequent_calculus)*, rather than (more conventional) [classical](https://en.wikipedia.org/wiki/Classical_logic) [axiomatic logic](https://en.wikipedia.org/wiki/Axiomatic_system) or [natural deduction](https://en.wikipedia.org/wiki/Natural_deduction). Moreover, the presentation will have a strong [linear/substructural logic](https://en.wikipedia.org/wiki/Linear_logic) flavor to it. 
 {{< /spoiler >}}
+ -->
 <!-- Those choices are not arbitrary -- towards the end of this series, I will discuss why I think they offer distinct pedagogical benefits in a first-exposure setting. -->
 <!-- Linearity enables students to draw upon a wealth of already developed intuition of "making things from resources", and the sequent calculus formalism provides a friendly user interface (UI) for students to interact with. -->
 <!-- However, there won't be any mention of sequent calculus will be made in this blog post, and the reader is not expected to have any prior knowledge of it. At the end of the blog post, I will briefly discuss how each concept in the game maps to its counterpart in sequent calculus. -->
@@ -126,7 +127,7 @@ Wait, we don't have any `wood` left in our inventory! We just used it to make a 
 
 ## Honorable cheating
 
-As a kind game designer, I want to make our life a little easier: let's NOT worry about how many copies of each item we have in our inventory. Instead, I will introduce a "cheat-code" action called {{< act "dup" >}}, whose effect is captured by the following diagram:
+As a kind game designer, I want to make our life a little easier: let's NOT worry about how many copies of each item we have in our inventory. Instead, I will introduce a "cheat-code" action called {{< act "dup" >}}, whose effect is captured by the following diagram:[^dup] 
 
 {{< mc-derivation step="1" >}}
 { "engine": { "have": ["A", "..."], "show": "G",
@@ -144,7 +145,7 @@ As a kind game designer, I want to make our life a little easier: let's NOT worr
 -->
 That is, for any item `A`, {{< act "dup" >}} allows us to make a copy of `A` in our inventory.
 
-Intuitively, what this cheat code says is that *possessing one copy of an item is as good as having infinitely many copies of that item*. In other words, we don't have to worry about running out of items in our inventory, since we can always keep duplicating them.[^dup] [^nocheat]
+Intuitively, what this cheat code says is that *possessing one copy of an item is as good as having infinitely many copies of that item*. In other words, we don't have to worry about running out of items in our inventory, since we can always keep duplicating them.[^nocheat]
 
 [^dup]: If you are familiar with Minecraft, {{< act "dup" >}} might remind you of the differences between ["survival mode" and "creative mode"](https://www.minecraft.net/en-us/article/creative-vs-survival-mode): in survival mode, you can't duplicate items; in creative mode, you can not only duplicate items, but you can also create items out of thin air. In our game, without {{< act "dup" >}}, the game is played exactly like Minecraft's survival mode; with {{< act "dup" >}}, the game sits somewhere in between survival and creative modes, since we can duplicate items, but we can't create them out of thin air.
 
@@ -228,7 +229,7 @@ In the backward setting, a subtle yet important question arises: what should the
 
 Note that this question is a *game design question*, since it will affect all games that involve backward reasoning and hence potentially affect every player.
 
-## Inventory management
+### Inventory management
 
 The most natural approach that you might think of is to "split" the inventory into two disjoint parts, one for each branch. For example, we might allocate `wood` to the left branch and `ore` to the right branch, which would give us the following diagram:
 
