@@ -713,6 +713,63 @@
     margin-bottom: 0;
   }
 
+  /* ----- Collapsible answers (<details>) -----
+     Once open, a revealed answer can run long enough that its end is
+     ambiguous, so it borrows the blockquote's left rail to mark the span.
+     The rail is present but transparent when closed, which reserves its
+     space and keeps the summary from shifting on toggle. */
+  details {
+    margin: 1.4em 0;
+    padding-left: 1.4em;
+    border-left: 2px solid transparent;
+  }
+
+  details[open] {
+    border-left-color: var(--border-color);
+  }
+
+  details > summary {
+    /* Pulled back into the rail's gutter so the summary stays aligned with
+       body text while the revealed content sits indented under the rail. */
+    margin-left: -1.4em;
+    cursor: pointer;
+    font-family: var(--font-ui);
+    font-size: 0.85em;
+    color: var(--muted-color);
+    list-style: none;
+  }
+
+  details > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  details > summary::before {
+    content: "▸";
+    display: inline-block;
+    width: 1em;
+    color: var(--muted-color);
+  }
+
+  details[open] > summary::before {
+    content: "▾";
+  }
+
+  details > summary:hover {
+    color: var(--hover-color);
+  }
+
+  details > summary:hover::before {
+    color: var(--hover-color);
+  }
+
+  details[open] > summary {
+    margin-bottom: 0.8em;
+  }
+
+  details[open] > :last-child {
+    margin-bottom: 0;
+  }
+
   /* ----- Lists ----- */
   ul,
   ol {
