@@ -275,7 +275,7 @@ So no items are conjured from nothing, and the two schemes are equivalent in exp
 
 In summary, here's how backward reasoning works more generally:
 
-> If we have an action {{< act "f" >}}: `A, B -> C`, and our current goal is to make `C`, then we can apply {{< act "f" >}} backwards to fork the game state into two branches, one whose goal is `A` and one whose goal is `B`. The inventory of each branch is identical to the original inventory.
+- If we have an action {{< act "f" >}}: `A, B -> C`, and our current goal is to make `C`, then we can apply {{< act "f" >}} backwards to fork the game state into two branches, one whose goal is `A` and one whose goal is `B`. The inventory of each branch is identical to the original inventory.
 
 Diagrammatically, we can represent backward reasoning as follows:
 
@@ -314,9 +314,8 @@ B           C
 -->
 
 The following slogans help us remember the difference between forward and backward reasoning:
-> Forward reasoning looks at the ***inventory*** (what we have).
-> 
-> Backward reasoning looks at the ***goal*** (what we want).
+- Forward reasoning looks at the ***inventory*** (what we have).
+- Backward reasoning looks at the ***goal*** (what we want).
 
 **Exercise**: Can you complete the following game using a *mix* of forward and backward reasoning? Is there an order of mixing forward and backward reasoning that takes the fewest number of actions? Is there an order that you find the most intuitive?
 

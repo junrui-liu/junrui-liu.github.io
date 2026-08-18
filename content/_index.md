@@ -19,8 +19,9 @@ I received my Ph.D. from [UC Santa Barbara](https://www.ucsb.edu/), advised by [
 
 ### Contact
 <!-- I borrowed the email hiding trick from Alex Ozdemir: https://cs.stanford.edu/~aozdemir/ -->
-I can be reached via email at <span class="email" data-cipher="iEVPf4+NK9LcvPt4qziFKXZSSsy1LT49CxRe9x+1E10=" tabindex="0">(hover to reveal)</span>.
-You can also find me on
+- Email: <span class="email" data-cipher="iEVPf4+NK9LcvPt4qziFKXZSSsy1LT49CxRe9x+1E10=" tabindex="0">&lt;hover to reveal&gt;</span>
+- Office: 14-205 ([map](/pdfs/office.pdf))
+- Other Links:
 <a target="_blank" rel="noopener noreferrer" href="https://scholar.google.com/citations?user=DWWFQkkAAAAJ">
 Google Scholar
 <i class="fa-brands fa-google-scholar"></i></a>,
