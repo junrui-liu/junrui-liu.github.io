@@ -6,7 +6,11 @@ weight = 20
 
 
 ### Instructor 🧑‍🏫
- 
+
+- **CSC 3300 — Programming Languages**  
+  <small>[Fall 2026](https://brinckerhoff.org/clements/2268-csc3300/index.html)</small>
+
+At UCSB:
 - **CS 501 — Techniques of Computer Science Teaching**  
   <small>[Fall 2025](https://junrui-liu.github.io/cs501/)</small>
 
@@ -19,14 +23,16 @@ weight = 20
 
 ### Teaching Assistant 🧑‍💻
 
+At UCSB:
+
 - [**Lead TA**](https://otl.ucsb.edu/graduate-students/ta-certificate-programs/lead-ta-institute), UCSB Computer Science Department  
   <small>2025–26 academic year</small>
 
-- **CS 160 — Compilers**  
-  <small>[Spring 2025](https://ucsb.instructure.com/courses/26675) · [Spring 2023](https://github.com/junrui-liu/CS160-TA) · [Fall 2021](https://github.com/junrui-liu/CS160-TA/tree/fall-2021)</small>
-
 - **CS 162 — Programming Languages**  
   <small>[Winter 2025](https://github.com/junrui-liu/CS162-TA) · [Winter 2024](https://github.com/junrui-liu/CS162-TA/tree/winter-2024) · [Winter 2023](https://github.com/junrui-liu/CS162-TA/tree/winter-2023) · [Winter 2022](https://github.com/junrui-liu/CS162-TA/tree/winter-2022)</small>
+
+- **CS 160 — Compilers**  
+  <small>[Spring 2025](https://ucsb.instructure.com/courses/26675) · [Spring 2023](https://github.com/junrui-liu/CS160-TA) · [Fall 2021](https://github.com/junrui-liu/CS160-TA/tree/fall-2021)</small>
 
 - **CS 190J — Blockchain Technologies and Security**  
   <small>[Spring 2024](https://github.com/fredfeng/CS190-blockchain/tree/Spring24)</small>
