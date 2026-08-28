@@ -12,7 +12,9 @@ weight = 1
 > 
 > **Office hours**:
 >   - **Time**: Tuesday & Thursday 5PM-6PM, Friday 10AM-12PM
->   - **Mode**: In person, at 14-205 ([map](/pdfs/office.pdf)). If you can't make it, please email me to schedule a remote meeting.
+>   - **Mode**: In person, in 14-205 ([map](/pdfs/office.pdf)). If you can't make it, please email me to schedule a remote meeting.
+>
+> **Calender**: [link](https://outlook.office365.com/owa/calendar/e7ac784d55e9410198f737333140d579@calpoly.edu/d4bf636b3be14a4c92e9e3e56b73131c4732148899076785833/calendar.html)
 
 
 ### About Me
